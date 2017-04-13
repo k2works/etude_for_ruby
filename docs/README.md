@@ -31,6 +31,8 @@ Rubyプログラミング練習
 **[⬆ back to top](#構成)**
 
 ## 運用
+### [ドキュメント運用](./ops/ship_document.md)
+
 **[⬆ back to top](#運用)**
 
 # 参照 #
