@@ -8,6 +8,7 @@ COPY etude_for_ruby.gemspec $APP_ROOT
 
 COPY . $APP_ROOT
 RUN bundle
+RUN bundle exec rspec
 
 EXPOSE  5000
 CMD ["bin/console"]
