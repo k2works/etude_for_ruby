@@ -42,3 +42,4 @@ Rubyプログラミング練習
 **[⬆ back to top](#運用)**
 
 # 参照 #
++ [Project: RSpec Expectations 3.5](https://www.relishapp.com/rspec/rspec-expectations/v/3-5/docs/built-in-matchers)
