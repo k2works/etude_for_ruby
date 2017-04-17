@@ -11,5 +11,20 @@ RSpec.describe FizzBuzz do
     it 'return FizzBuzz if it is divisible by 3 or 5.' do
       expect(FizzBuzz.execute(15)).to eq('FizzBuzz')
     end
+    context 'run up to 100. ' do
+      it 'return Fizz,Buzz,FizzBuzz or RuntimeError' do
+        100.times do |n|
+          if n % 3 == 0 && n % 5 == 0
+            expect(FizzBuzz.execute(n)).to eq('FizzBuzz')
+          elsif n % 3 == 0
+            expect(FizzBuzz.execute(n)).to eq('Fizz')
+          elsif n % 5 == 0
+            expect(FizzBuzz.execute(n)).to eq('Buzz')
+          else
+            expect{FizzBuzz.execute(n)}.to raise_error(RuntimeError)
+          end
+        end
+      end
+    end
   end
 end
