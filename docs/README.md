@@ -32,6 +32,8 @@ Rubyプログラミング練習
 **[⬆ back to top](#構成)**
 
 ## 開発
+### [FizzBuzz](./dev/fizz_buzz.md)
+
 **[⬆ back to top](#構成)**
 
 ## 運用
