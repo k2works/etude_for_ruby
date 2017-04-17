@@ -25,6 +25,8 @@ Rubyプログラミング練習
 **[⬆ back to top](#構成)**
 
 ## 配置
+### [CircleCI配置](./ops/ship_circleci.md)
+
 **[⬆ back to top](#構成)**
 
 ## 開発
