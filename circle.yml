@@ -1,0 +1,10 @@
+machine:
+  ruby:
+    version: 2.4.0
+  timezone: Asia/Tokyo
+
+test:
+  pre:
+    - bundle
+  override:
+    - bundle exec rspec
