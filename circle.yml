@@ -17,5 +17,6 @@ deployment:
       - git config user.name $RUBYGEMS_USER
       - git config user.email $RUBYGEMS_EMAIL
       - bundle exec rake build
+      - git add .
       - git commit -am 'Release Gem'
       - bundle exec rake release
