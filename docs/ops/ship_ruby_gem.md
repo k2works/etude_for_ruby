@@ -23,3 +23,4 @@ gem push etude_for_ruby-0.0.0.gem
 
 ## 参照
 + [Version Badge](https://badge.fury.io/)
++ [RubygemsへのデプロイをCircleCIで自動化してみた](http://leko.jp/archives/871)
