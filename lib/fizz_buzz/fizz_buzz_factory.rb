@@ -10,13 +10,13 @@ class FizzBuzzFactory
 
   def create
     if fizz?
-      Fizz.new
+      @command ||= Fizz.new
     elsif buzz?
-      Buzz.new
+      @command ||= Buzz.new
     elsif fizz_buzz?
-      FizzBuzz.new
+      @command ||= FizzBuzz.new
     else
-      NotFizzBuzz.new
+      @command ||= NotFizzBuzz.new
     end
   end
 
