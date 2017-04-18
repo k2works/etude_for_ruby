@@ -32,5 +32,13 @@ RSpec.describe FizzBuzz do
         end
       end
     end
+    context 'exception' do
+      it 'return RuntimeError' do
+        fizz_buzz.number=4
+        expect{fizz_buzz.execute}.to raise_error(RuntimeError)
+        fizz_buzz.number = 'three'
+        expect{fizz_buzz.execute}.to raise_error(RuntimeError)
+      end
+    end
   end
 end
