@@ -1,5 +1,7 @@
 class FizzBuzz
-  attr_accessor :number
+  def initialize(number)
+    @number = number
+  end
 
   def execute
     if fizz?
@@ -15,14 +17,14 @@ class FizzBuzz
 
   private
   def fizz?
-    number % 3 == 0 && number % 5 != 0
+    @number % 3 == 0 && @number % 5 != 0
   end
 
   def buzz?
-    number % 3 != 0 && number % 5 == 0
+    @number % 3 != 0 && @number % 5 == 0
   end
 
   def fizz_buzz?
-    number % 3 == 0 && number % 5 == 0
+    @number % 3 == 0 && @number % 5 == 0
   end
 end

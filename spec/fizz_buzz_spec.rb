@@ -1,25 +1,25 @@
 require 'spec_helper'
 
 RSpec.describe FizzBuzz do
-  let(:fizz_buzz){ FizzBuzz.new }
+  let(:fizz){ FizzBuzz.new(3) }
+  let(:buzz){ FizzBuzz.new(5) }
+  let(:fizz_buzz){ FizzBuzz.new(15) }
 
   describe '#execute' do
     it 'return Fizz if it is divisible by 3.' do
-      fizz_buzz.number=3
-      expect(fizz_buzz.execute).to eq('Fizz')
+      expect(fizz.execute).to eq('Fizz')
     end
     it 'return Buzz if it is divisible by 5.' do
-      fizz_buzz.number=5
-      expect(fizz_buzz.execute).to eq('Buzz')
+      expect(buzz.execute).to eq('Buzz')
     end
     it 'return fizz_buzz if it is divisible by 3 or 5.' do
-      fizz_buzz.number=15
       expect(fizz_buzz.execute).to eq('FizzBuzz')
     end
+
     context 'run up to 100. ' do
       it 'return Fizz,Buzz,FizzBuzz or RuntimeError' do
         100.times do |n|
-          fizz_buzz.number=n
+          fizz_buzz = FizzBuzz.new(n)
           if n % 3 == 0 && n % 5 == 0
             expect(fizz_buzz.execute).to eq('FizzBuzz')
           elsif n % 3 == 0
@@ -32,11 +32,12 @@ RSpec.describe FizzBuzz do
         end
       end
     end
+
     context 'exception' do
       it 'return RuntimeError' do
-        fizz_buzz.number=4
+        fizz_buzz = FizzBuzz.new(4)
         expect{fizz_buzz.execute}.to raise_error(RuntimeError)
-        fizz_buzz.number = 'three'
+        fizz_buzz = FizzBuzz.new('Three')
         expect{fizz_buzz.execute}.to raise_error(RuntimeError)
       end
     end
