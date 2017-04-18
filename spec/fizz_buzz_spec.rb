@@ -1,9 +1,9 @@
 require 'spec_helper'
 
 RSpec.describe FizzBuzz do
-  let(:fizz){ FizzBuzzFactory.new(3).create }
-  let(:buzz){ FizzBuzzFactory.new(5).create }
-  let(:fizz_buzz){ FizzBuzzFactory.new(15).create }
+  let(:fizz){ FizzBuzzFactory.create(3) }
+  let(:buzz){ FizzBuzzFactory.create(5) }
+  let(:fizz_buzz){ FizzBuzzFactory.create(15) }
 
   describe '#execute' do
     it 'return Fizz if it is divisible by 3.' do
@@ -19,7 +19,7 @@ RSpec.describe FizzBuzz do
     context 'run up to 100. ' do
       it 'return Fizz,Buzz,FizzBuzz or RuntimeError' do
         100.times do |n|
-          fizz_buzz = FizzBuzzFactory.new(n).create
+          fizz_buzz = FizzBuzzFactory.create(n)
           if n % 3 == 0 && n % 5 == 0
             expect(fizz_buzz.execute).to eq('FizzBuzz')
           elsif n % 3 == 0
@@ -35,9 +35,9 @@ RSpec.describe FizzBuzz do
 
     context 'exception' do
       it 'return RuntimeError' do
-        not_fizz_buzz = FizzBuzzFactory.new(4).create
+        not_fizz_buzz = FizzBuzzFactory.create(4)
         expect{not_fizz_buzz.execute}.to raise_error(RuntimeError)
-        not_fizz_buzz = FizzBuzzFactory.new('Three').create
+        not_fizz_buzz = FizzBuzzFactory.create('Three')
         expect{not_fizz_buzz.execute}.to raise_error(RuntimeError)
       end
     end

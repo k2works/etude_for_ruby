@@ -4,32 +4,29 @@ require_relative 'fizz_buzz'
 require_relative 'not_fizz_buzz'
 
 class FizzBuzzFactory
-  def initialize(number)
+  def self.create(number)
     @number = number
-  end
-
-  def create
-    if fizz?
-      @command ||= Fizz.new
-    elsif buzz?
-      @command ||= Buzz.new
-    elsif fizz_buzz?
-      @command ||= FizzBuzz.new
+    if self.fizz?
+      Fizz.new
+    elsif self.buzz?
+      Buzz.new
+    elsif self.fizz_buzz?
+      FizzBuzz.new
     else
-      @command ||= NotFizzBuzz.new
+      NotFizzBuzz.new
     end
   end
 
   private
-  def fizz?
+  def self.fizz?
     @number % 3 == 0 && @number % 5 != 0
   end
 
-  def buzz?
+  def self.buzz?
     @number % 3 != 0 && @number % 5 == 0
   end
 
-  def fizz_buzz?
+  def self.fizz_buzz?
     @number % 3 == 0 && @number % 5 == 0
   end
 end
