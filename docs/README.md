@@ -33,6 +33,7 @@ Rubyプログラミング練習
 
 ## 開発
 ### [FizzBuzz](./dev/fizz_buzz.md)
+### [MathematicalPuzzle](./dev/mathematic_pazzule.md)
 
 **[⬆ back to top](#構成)**
 
