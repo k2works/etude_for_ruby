@@ -1,7 +1,6 @@
 module MathematicalPuzzle
   class Palindrome
     def self.return_minimum_palindrome(number)
-      number
       while true
         if fulfill_simultaneously?(number)
           return number.to_s
@@ -27,14 +26,13 @@ module MathematicalPuzzle
     BIN = 'BIN'
 
     def initialize(number,type=DEC)
-      @number = number
       @type = case type
                 when DEC;
-                  DecimalPalindrome.new(@number)
+                  DecimalPalindrome.new(number)
                 when OCT;
-                  OctalPalindrome.new(@number)
+                  OctalPalindrome.new(number)
                 when BIN;
-                  BinaryPalindrome.new(@number)
+                  BinaryPalindrome.new(number)
                 else
                   NonPalindrome.new
               end
