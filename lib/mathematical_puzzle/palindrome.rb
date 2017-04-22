@@ -6,60 +6,79 @@ module MathematicalPuzzle
 
     def initialize(number,type=DEC)
       @number = number
-      @type = type
+      @type = case type
+                when DEC;
+                  DecimalPalindrome.new(@number)
+                when OCT;
+                  OctalPalindrome.new(@number)
+                when BIN;
+                  BinaryPalindrome.new(@number)
+                else
+                  NonPalindrome.new
+              end
     end
 
-    def palindrome
-      case @type
-        when DEC;
-          DecimalPalindrome.new(@number,@type).palindrome? ? @number.to_s : raise
-        when OCT;
-          OctalPalindrome.new(@number,@type).palindrome? ? @number.to_s(2) : raise
-        when BIN;
-          BinaryPalindrome.new(@number,@type).palindrome? ? @number.to_s(8) : raise
-        else
-          raise
-      end
+    def return_palindrome
+      @type.palindrome? ? @type.number : raise
     end
 
     def return_minimum_palindrome
       @number = 11
       while true
-        if DecimalPalindrome.new(@number,@type).palindrome? && OctalPalindrome.new(@number,@type).palindrome? && BinaryPalindrome.new(@number,@type).palindrome?
+        if fulfill_simultaneously?
           return @number.to_s
         end
         @number += 1
       end
     end
-  end
 
-  class DecimalPalindrome < Palindrome
-    def initialize(number,type)
-      super
-    end
-
-    def palindrome?
-      @number.to_s.reverse == @number.to_s
+    private
+    def fulfill_simultaneously?
+      DecimalPalindrome.new(@number).palindrome? &&
+          OctalPalindrome.new(@number).palindrome? &&
+          BinaryPalindrome.new(@number).palindrome?
     end
   end
 
-  class OctalPalindrome < Palindrome
-    def initialize(number,type)
-      super
+  class DecimalPalindrome
+    attr_reader :number
+
+    def initialize(number)
+      @number = number.to_s
     end
 
     def palindrome?
-      @number.to_s(2).reverse == @number.to_s(2)
+      @number.reverse == @number
     end
   end
 
-  class BinaryPalindrome < Palindrome
-    def initialize(number,type)
-      super
+  class OctalPalindrome
+    attr_reader :number
+
+    def initialize(number)
+      @number = number.to_s(2)
     end
 
     def palindrome?
-      @number.to_s(8).reverse == @number.to_s(8)
+      @number.reverse == @number
+    end
+  end
+
+  class BinaryPalindrome
+    attr_reader :number
+
+    def initialize(number)
+      @number = number.to_s(8)
+    end
+
+    def palindrome?
+      @number.reverse == @number
+    end
+  end
+
+  class NonPalindrome
+    def palindrome?
+      raise
     end
   end
 end
