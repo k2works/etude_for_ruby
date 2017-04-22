@@ -4,15 +4,18 @@ RSpec.describe MathematicalPuzzle::MathematicalPuzzle do
   describe '#palindrome' do
     it 'becomes a palindrome when it is a decimal number' do
       o = MathematicalPuzzle::MathematicalPuzzle.new
-      expect(o.palindrome(11,'DEC')).to eq('11')
+      t = MathematicalPuzzle::MathematicalPuzzle::DEC
+      expect(o.palindrome(11,t)).to eq('11')
     end
     it 'becomes a palindrome when it is a octal number' do
       o = MathematicalPuzzle::MathematicalPuzzle.new
-      expect(o.palindrome(9,'OCT')).to eq('1001')
+      t = MathematicalPuzzle::MathematicalPuzzle::OCT
+      expect(o.palindrome(9,t)).to eq('1001')
     end
     it 'becomes a palindrome when it is a binary number' do
       o = MathematicalPuzzle::MathematicalPuzzle.new
-      expect(o.palindrome(9,'BIN')).to eq('11')
+      t = MathematicalPuzzle::MathematicalPuzzle::BIN
+      expect(o.palindrome(9,t)).to eq('11')
     end
     it 'raise exception' do
       o = MathematicalPuzzle::MathematicalPuzzle.new
