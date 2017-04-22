@@ -1,5 +1,5 @@
 module MathematicalPuzzle
-  class MathematicalPuzzle
+  class Palindrome
     DEC = 'DEC'
     OCT = 'OCT'
     BIN = 'BIN'
