@@ -4,7 +4,7 @@ module MathematicalPuzzle
     OCT = 'OCT'
     BIN = 'BIN'
 
-    def initialize(number=11,type=DEC)
+    def initialize(number,type=DEC)
       @number = number
       @type = type
     end
@@ -12,36 +12,54 @@ module MathematicalPuzzle
     def palindrome
       case @type
         when DEC;
-          reverse_dec? ? @number.to_s : raise
+          DecimalPalindrome.new(@number,@type).palindrome? ? @number.to_s : raise
         when OCT;
-          reverse_oct? ? @number.to_s(2) : raise
+          OctalPalindrome.new(@number,@type).palindrome? ? @number.to_s(2) : raise
         when BIN;
-          reverse_bin? ? @number.to_s(8) : raise
+          BinaryPalindrome.new(@number,@type).palindrome? ? @number.to_s(8) : raise
         else
           raise
       end
     end
 
     def return_minimum_palindrome
+      @number = 11
       while true
-        if reverse_dec? && reverse_oct? && reverse_bin?
+        if DecimalPalindrome.new(@number,@type).palindrome? && OctalPalindrome.new(@number,@type).palindrome? && BinaryPalindrome.new(@number,@type).palindrome?
           return @number.to_s
         end
         @number += 1
       end
     end
+  end
 
-    private
-    def reverse_bin?
-      @number.to_s(8).reverse == @number.to_s(8)
+  class DecimalPalindrome < Palindrome
+    def initialize(number,type)
+      super
     end
 
-    def reverse_oct?
+    def palindrome?
+      @number.to_s.reverse == @number.to_s
+    end
+  end
+
+  class OctalPalindrome < Palindrome
+    def initialize(number,type)
+      super
+    end
+
+    def palindrome?
       @number.to_s(2).reverse == @number.to_s(2)
     end
+  end
 
-    def reverse_dec?
-      @number.to_s.reverse == @number.to_s
+  class BinaryPalindrome < Palindrome
+    def initialize(number,type)
+      super
+    end
+
+    def palindrome?
+      @number.to_s(8).reverse == @number.to_s(8)
     end
   end
 end
