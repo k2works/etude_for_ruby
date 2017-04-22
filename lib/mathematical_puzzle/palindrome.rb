@@ -1,5 +1,27 @@
 module MathematicalPuzzle
   class Palindrome
+    def self.return_minimum_palindrome(number)
+      number
+      while true
+        if fulfill_simultaneously?(number)
+          return number.to_s
+        end
+        number += 1
+      end
+    end
+
+    private
+    def self.fulfill_simultaneously?(number)
+      NumberPalindrome.new(number).palindrome? &&
+          NumberPalindrome.new(number,NumberPalindrome::OCT).palindrome? &&
+          NumberPalindrome.new(number,NumberPalindrome::BIN).palindrome?
+    end
+  end
+
+  class StringPalindrome < Palindrome
+  end
+
+  class NumberPalindrome < Palindrome
     DEC = 'DEC'
     OCT = 'OCT'
     BIN = 'BIN'
@@ -22,21 +44,8 @@ module MathematicalPuzzle
       @type.palindrome? ? @type.number : raise
     end
 
-    def self.return_minimum_palindrome(number)
-      number
-      while true
-        if fulfill_simultaneously?(number)
-          return number.to_s
-        end
-        number += 1
-      end
-    end
-
-    private
-    def self.fulfill_simultaneously?(number)
-      DecimalPalindrome.new(number).palindrome? &&
-          OctalPalindrome.new(number).palindrome? &&
-          BinaryPalindrome.new(number).palindrome?
+    def palindrome?
+      @type.palindrome?
     end
   end
 
