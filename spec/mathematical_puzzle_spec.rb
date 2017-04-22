@@ -3,23 +3,23 @@ require 'spec_helper'
 RSpec.describe MathematicalPuzzle::Palindrome do
   describe '#palindrome' do
     it 'becomes a palindrome when it is a decimal number' do
-      o = MathematicalPuzzle::Palindrome.new
       t = MathematicalPuzzle::Palindrome::DEC
-      expect(o.palindrome(11,t)).to eq('11')
+      o = MathematicalPuzzle::Palindrome.new(11,t)
+      expect(o.palindrome).to eq('11')
     end
     it 'becomes a palindrome when it is a octal number' do
-      o = MathematicalPuzzle::Palindrome.new
       t = MathematicalPuzzle::Palindrome::OCT
-      expect(o.palindrome(9,t)).to eq('1001')
+      o = MathematicalPuzzle::Palindrome.new(9,t)
+      expect(o.palindrome).to eq('1001')
     end
     it 'becomes a palindrome when it is a binary number' do
-      o = MathematicalPuzzle::Palindrome.new
       t = MathematicalPuzzle::Palindrome::BIN
-      expect(o.palindrome(9,t)).to eq('11')
+      o = MathematicalPuzzle::Palindrome.new(9,t)
+      expect(o.palindrome).to eq('11')
     end
     it 'raise exception' do
-      o = MathematicalPuzzle::Palindrome.new
-      expect{o.palindrome(12,'NON')}.to raise_exception
+      o = MathematicalPuzzle::Palindrome.new(12,'NON')
+      expect{o.palindrome}.to raise_exception
     end
   end
 

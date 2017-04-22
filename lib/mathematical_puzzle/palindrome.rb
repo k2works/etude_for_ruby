@@ -4,40 +4,44 @@ module MathematicalPuzzle
     OCT = 'OCT'
     BIN = 'BIN'
 
-    def palindrome(number,type)
-      case type
+    def initialize(number=11,type=DEC)
+      @number = number
+      @type = type
+    end
+
+    def palindrome
+      case @type
         when DEC;
-          reverse_dec?(number) ? number.to_s : raise
+          reverse_dec? ? @number.to_s : raise
         when OCT;
-          reverse_oct?(number) ? number.to_s(2) : raise
+          reverse_oct? ? @number.to_s(2) : raise
         when BIN;
-          reverse_bin?(number) ? number.to_s(8) : raise
+          reverse_bin? ? @number.to_s(8) : raise
         else
           raise
       end
     end
 
     def return_minimum_palindrome
-      number = 11
       while true
-        if reverse_dec?(number) && reverse_oct?(number) && reverse_bin?(number)
-          return number.to_s
+        if reverse_dec? && reverse_oct? && reverse_bin?
+          return @number.to_s
         end
-        number += 1
+        @number += 1
       end
     end
 
     private
-    def reverse_bin?(number)
-      number.to_s(8).reverse == number.to_s(8)
+    def reverse_bin?
+      @number.to_s(8).reverse == @number.to_s(8)
     end
 
-    def reverse_oct?(number)
-      number.to_s(2).reverse == number.to_s(2)
+    def reverse_oct?
+      @number.to_s(2).reverse == @number.to_s(2)
     end
 
-    def reverse_dec?(number)
-      number.to_s.reverse == number.to_s
+    def reverse_dec?
+      @number.to_s.reverse == @number.to_s
     end
   end
 end
