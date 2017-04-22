@@ -22,21 +22,21 @@ module MathematicalPuzzle
       @type.palindrome? ? @type.number : raise
     end
 
-    def return_minimum_palindrome
-      @number = 11
+    def self.return_minimum_palindrome(number)
+      number
       while true
-        if fulfill_simultaneously?
-          return @number.to_s
+        if fulfill_simultaneously?(number)
+          return number.to_s
         end
-        @number += 1
+        number += 1
       end
     end
 
     private
-    def fulfill_simultaneously?
-      DecimalPalindrome.new(@number).palindrome? &&
-          OctalPalindrome.new(@number).palindrome? &&
-          BinaryPalindrome.new(@number).palindrome?
+    def self.fulfill_simultaneously?(number)
+      DecimalPalindrome.new(number).palindrome? &&
+          OctalPalindrome.new(number).palindrome? &&
+          BinaryPalindrome.new(number).palindrome?
     end
   end
 

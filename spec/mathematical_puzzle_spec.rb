@@ -25,8 +25,8 @@ RSpec.describe MathematicalPuzzle::Palindrome do
 
   describe '#return_minimum_palindrome' do
     it 'fulfill all of the above simultaneously.' do
-      o = MathematicalPuzzle::Palindrome.new(11)
-      expect(o.return_minimum_palindrome).to eq('585')
+      o = MathematicalPuzzle::Palindrome.return_minimum_palindrome(11)
+      expect(o).to eq('585')
     end
   end
 end
