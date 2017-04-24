@@ -36,10 +36,26 @@ RSpec.describe MathematicalPuzzle do
   end
 
   describe 'FourArithmeticOperations' do
+    describe '.collect_vals' do
+      it 'return array of val' do
+        vals = MathematicalPuzzle::FourArithmeticOperations.collect_val
+        expect(vals).not_to be_nil
+        vals.each do |val|
+          puts val
+          puts MathematicalPuzzle::FourArithmeticOperations.calc(val)
+        end
+      end
+    end
+
     describe '.execute' do
-      it 'return 1111 when arg is 1111' do
-        i = MathematicalPuzzle::FourArithmeticOperations.execute(1111)
-        expect(i).to eq('1111')
+      it 'return 351 when arg is 153' do
+        i = MathematicalPuzzle::FourArithmeticOperations.execute(351)
+        expect(i).to eq('153')
+      end
+
+      it 'return 1395 when arg is 5931' do
+        i = MathematicalPuzzle::FourArithmeticOperations.execute(5931)
+        expect(i).to eq('1395')
       end
     end
   end
