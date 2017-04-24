@@ -36,6 +36,11 @@ RSpec.describe MathematicalPuzzle do
   end
 
   describe 'FourArithmeticOperations' do
-    it 'do something'
+    describe '.execute' do
+      it 'return 1111 when arg is 1111' do
+        i = MathematicalPuzzle::FourArithmeticOperations.execute(1111)
+        expect(i).to eq('1111')
+      end
+    end
   end
 end
