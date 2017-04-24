@@ -34,4 +34,8 @@ RSpec.describe MathematicalPuzzle do
       MathematicalPuzzle::NumberPalindrome.new(number, type)
     end
   end
+
+  describe 'FourArithmeticOperations' do
+    it 'do something'
+  end
 end
