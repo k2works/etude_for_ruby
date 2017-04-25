@@ -36,14 +36,23 @@ RSpec.describe MathematicalPuzzle do
   end
 
   describe 'FourArithmeticOperations' do
-    describe '.collect_vals' do
-      it 'return array of val' do
-        vals = MathematicalPuzzle::FourArithmeticOperations.collect_val
-        expect(vals).not_to be_nil
-        vals.each do |val|
-          puts val
-          puts MathematicalPuzzle::FourArithmeticOperations.calc(val)
-        end
+    describe '.calc' do
+      it 'return eval from array' do
+        val = ['0','+','0','+','0','+','1']
+        ret = MathematicalPuzzle::FourArithmeticOperations.calc(val)
+        expect(ret).to eq(1)
+      end
+
+      it 'return eval from array' do
+        val = ['0','','8','+','0','+','0']
+        ret = MathematicalPuzzle::FourArithmeticOperations.calc(val)
+        expect(ret).to eq(8)
+      end
+
+      it 'return eval from array' do
+        val = ['1','/','0','/','0','/','0']
+        ret = MathematicalPuzzle::FourArithmeticOperations.calc(val)
+        expect(ret).to be_nil
       end
     end
 

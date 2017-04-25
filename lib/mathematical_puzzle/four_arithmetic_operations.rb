@@ -1,11 +1,7 @@
 module MathematicalPuzzle
   class FourArithmeticOperations
     def self.execute(number)
-
-    end
-    def self.collect_val
       op = ['+','-','*','/','']
-      vals = []
       i = 1000
       while i < 10000
         c = i.to_s
@@ -15,9 +11,12 @@ module MathematicalPuzzle
           while k < op.length
             l = 0
             while l < op.length
-              val = c.slice(3) + op[j] + c.slice(2) + op[k] + c.slice(1) + op[l] + c.slice(0)
-              if val.length > 4
-                vals << val
+              val = [c.slice(3),op[j],c.slice(2),op[k],c.slice(1),op[l],c.slice(0)]
+              if val.length > 6
+                ev = self.calc(val)
+                if number.to_s.reverse.to_i == ev
+                  return ev.to_s
+                end
               end
               l += 1
             end
@@ -27,23 +26,24 @@ module MathematicalPuzzle
         end
         i += 1
       end
-      vals
     end
 
     def self.calc(val)
       begin
-        if /^0[1-9]/ =~ val
-          puts val
-          if /0+[0-9]*/ =~ val
-            val = val.slice(1) + val.slice(2) + val.slice(3) + val.slice(4) + val.slice(5)
-          else
-            val = val.slice(1) + val.slice(2) + val.slice(3) + val.slice(4) + val.slice(5)
+        val.each_with_index do |v, i|
+          if v == ''
+            if val[i-1] == '0'
+              val[i-1] = ''
+            end
           end
-          eval(val)
 
-        else
-          eval(val)
+          if v == '0'
+            if val[i-1] == '/'
+              val = []
+            end
+          end
         end
+        eval(val.join)
       rescue => exc
         puts "RESCUED!"
       end
