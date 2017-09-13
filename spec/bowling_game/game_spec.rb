@@ -1,4 +1,4 @@
-require_relative "../spec_helper"
+require "spec_helper"
 include BowlingGame
 
 RSpec.describe BowlingGame::Game do
