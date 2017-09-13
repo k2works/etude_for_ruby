@@ -1,6 +1,6 @@
   
   
-ボウリングゲーム
+[WIP]ボウリングゲーム
 ---
   
 ## 基本仕様
@@ -14,7 +14,7 @@
 ## ユースケース
   
 
-![](assets/37c8d83bd9cfbb9ac2fc730253ccbeaa0.png?0.2404596163712147)  
+![](assets/37c8d83bd9cfbb9ac2fc730253ccbeaa0.png?0.9747319873096061)  
   
 ### ユースケース１：ストライク
   
@@ -51,16 +51,16 @@ class TestGame < Test::Unit::TestCase
   end
 end
 ```
-<pre class="language-text">Loaded suite /Users/k2works/Projects/k2works/etude_for_ruby/docs/dev/022hle3gl_code_chunk
+<pre class="language-text">Loaded suite /Users/k2works/Projects/k2works/etude_for_ruby/docs/dev/9xwq5kuk7_code_chunk
 Started
 .
 
-Finished in 0.000669 seconds.
+Finished in 0.000543 seconds.
 ------
 1 tests, 1 assertions, 0 failures, 0 errors, 0 pendings, 0 omissions, 0 notifications
 100% passed
 ------
-1494.77 tests/s, 1494.77 assertions/s
+1841.62 tests/s, 1841.62 assertions/s
 </pre>
   
 ### ユースケース２：スペア
@@ -99,16 +99,16 @@ class TestGame < Test::Unit::TestCase
   end
 end
 ```
-<pre class="language-text">Loaded suite /Users/k2works/Projects/k2works/etude_for_ruby/docs/dev/pkcvo25d2_code_chunk
+<pre class="language-text">Loaded suite /Users/k2works/Projects/k2works/etude_for_ruby/docs/dev/t0qq12v83_code_chunk
 Started
 .
 
-Finished in 0.001871 seconds.
+Finished in 0.000565 seconds.
 ------
 1 tests, 1 assertions, 0 failures, 0 errors, 0 pendings, 0 omissions, 0 notifications
 100% passed
 ------
-534.47 tests/s, 534.47 assertions/s
+1769.91 tests/s, 1769.91 assertions/s
 </pre>
   
 ### ユースケース３：ガター
@@ -124,7 +124,7 @@ Finished in 0.001871 seconds.
 ## コアモデル
   
 
-![](assets/37c8d83bd9cfbb9ac2fc730253ccbeaa1.png?0.24084170946954608)  
+![](assets/37c8d83bd9cfbb9ac2fc730253ccbeaa1.png?0.6671396392459266)  
   
 ## 参照
   

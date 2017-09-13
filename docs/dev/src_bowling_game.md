@@ -6,7 +6,7 @@ markdown:
   absolute_image_path: false
 ---
 
-ボウリングゲーム
+[WIP]ボウリングゲーム
 ---
 
 ## 基本仕様
