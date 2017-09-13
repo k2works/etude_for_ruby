@@ -3,7 +3,7 @@ markdown:
   image_dir: /docs/dev/assets
   path: /docs/dev/bowling_game.md
   ignore_from_front_matter: true
-  absolute_image_path: true
+  absolute_image_path: false
 ---
 
 ボウリングゲーム

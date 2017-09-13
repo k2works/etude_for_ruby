@@ -14,7 +14,7 @@
 ## ユースケース
   
 
-![](/docs/dev/assets/37c8d83bd9cfbb9ac2fc730253ccbeaa0.png?0.22748779752530712)  
+![](assets/37c8d83bd9cfbb9ac2fc730253ccbeaa0.png?0.7033759482999333)  
   
 ### ユースケース１：ストライク
   
@@ -97,12 +97,12 @@ end
   
 ### ユースケース５：サンプルゲーム
   
-![](/docs/src/dev/images/score.png )
+![](./images/score.png )
   
 ## コアモデル
   
 
-![](/docs/dev/assets/37c8d83bd9cfbb9ac2fc730253ccbeaa1.png?0.5699431591784545)  
+![](assets/37c8d83bd9cfbb9ac2fc730253ccbeaa1.png?0.2733479880606613)  
   
 ## 参照
   
