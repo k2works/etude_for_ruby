@@ -14,7 +14,7 @@
 ## ユースケース
   
 
-![](assets/37c8d83bd9cfbb9ac2fc730253ccbeaa0.png?0.7033759482999333)  
+![](assets/37c8d83bd9cfbb9ac2fc730253ccbeaa0.png?0.2404596163712147)  
   
 ### ユースケース１：ストライク
   
@@ -51,6 +51,17 @@ class TestGame < Test::Unit::TestCase
   end
 end
 ```
+<pre class="language-text">Loaded suite /Users/k2works/Projects/k2works/etude_for_ruby/docs/dev/022hle3gl_code_chunk
+Started
+.
+
+Finished in 0.000669 seconds.
+------
+1 tests, 1 assertions, 0 failures, 0 errors, 0 pendings, 0 omissions, 0 notifications
+100% passed
+------
+1494.77 tests/s, 1494.77 assertions/s
+</pre>
   
 ### ユースケース２：スペア
   
@@ -88,6 +99,17 @@ class TestGame < Test::Unit::TestCase
   end
 end
 ```
+<pre class="language-text">Loaded suite /Users/k2works/Projects/k2works/etude_for_ruby/docs/dev/pkcvo25d2_code_chunk
+Started
+.
+
+Finished in 0.001871 seconds.
+------
+1 tests, 1 assertions, 0 failures, 0 errors, 0 pendings, 0 omissions, 0 notifications
+100% passed
+------
+534.47 tests/s, 534.47 assertions/s
+</pre>
   
 ### ユースケース３：ガター
   
@@ -102,7 +124,7 @@ end
 ## コアモデル
   
 
-![](assets/37c8d83bd9cfbb9ac2fc730253ccbeaa1.png?0.2733479880606613)  
+![](assets/37c8d83bd9cfbb9ac2fc730253ccbeaa1.png?0.24084170946954608)  
   
 ## 参照
   
