@@ -77,15 +77,15 @@ describe 'ProceduralShape' do
     let(:circle) { Circle.new(5) }
 
     it 'calculate area of square' do
-      assert_equal 100, geometry.area(square)
+      assert_equal geometry.area(square), 100
     end
 
     it 'calculate area of rectangle' do
-      assert_equal 200, geometry.area(rectangle)
+      assert_equal  geometry.area(rectangle), 200
     end
 
     it 'calculate area of circle' do
-      assert_equal 78.5, geometry.area(circle)
+      assert_equal geometry.area(circle), 78.5
     end
   end
 end
@@ -96,7 +96,16 @@ end
 require 'test/unit'
 require 'minitest/autorun'
 
-class Square
+class AbstractMethodError < StandardError
+end
+
+class Shape
+  def area
+    raise AbstractMethodError
+  end
+end
+
+class Square < Shape
   attr_accessor :side
 
   def initialize(side)
@@ -108,7 +117,7 @@ class Square
   end
 end
 
-class Rectangle
+class Rectangle < Shape
   attr_accessor :height, :width
 
   def initialize(height, width)
@@ -121,7 +130,7 @@ class Rectangle
   end
 end
 
-class Circle
+class Circle < Shape
   PI = 3.14
 
   attr_accessor :radius
@@ -136,36 +145,34 @@ class Circle
 end
 
 describe 'PolymorphicShape' do
+  describe Shape do
+    let(:shape) { Shape.new }
+    it { assert_raises(AbstractMethodError) { shape.area } }
+  end
+
   describe Square do
     let(:square) { Square.new(10) }
-    subject { square }
-
-    it 'calculate area' do
-      assert_equal 100, subject.area
-    end
+    subject { square.area }
+    it { assert_equal subject, 100 }
   end
 
   describe Rectangle do
     let(:rectangle) { Rectangle.new(10,20) }
-    subject { rectangle }
-
-    it 'calculate area' do
-      assert_equal 200, subject.area
-    end
+    subject { rectangle.area }
+    it { assert_equal subject, 200 }
   end
 
   describe Circle do
     let(:circle) { Circle.new(5) }
-    subject { circle }
-
-    it 'calculate area' do
-      assert_equal 78.5, subject.area
-    end
+    subject { circle.area }
+    it { assert_equal subject, 78.5 }
   end
 end
 ````
 
 ## コアモデル
+### ProceduralShape
+
 ```puml
 @startuml
 
@@ -184,10 +191,15 @@ Geometry --> Circle
 @enduml
 ```
 
+### PolymorphicShape
+
 ```puml
 @startuml
 
 package "PolymorphicShape" {
+abstract Shape {
+  +area()
+}
 class Square {
   +area()
 }
@@ -197,6 +209,9 @@ class Rectangle {
 class Circle{
   +area()
 }
+Shape <|--d Square
+Shape <|--d Rectangle
+Shape <|--d Circle
 }
 @enduml
 ```
