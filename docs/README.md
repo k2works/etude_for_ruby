@@ -34,6 +34,7 @@ Rubyプログラミング練習
 ## 開発
 ### [FizzBuzz](./dev/fizz_buzz.md)
 ### [BowlingGame](./dev/bowling_game.md)
+### [Shape](./dev/objects_and_data_structures.md)
 
 **[⬆ back to top](#構成)**
 
