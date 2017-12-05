@@ -40,5 +40,4 @@ PreCommit:
 PrePush:
   RSpec:
     enabled: true
-    description: 'Run RSpec test suite'
-    required_executable: 'rspec'
+    command: ['bundle', 'exec', 'rspec'] # Invoke within Bundler context
