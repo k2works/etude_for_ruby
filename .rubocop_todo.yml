@@ -7,17 +7,6 @@
 # versions of RuboCop, may require this file to be generated again.
 
 # Offense count: 3
-Lint/IneffectiveAccessModifier:
-  Exclude:
-    - 'lib/fizz_buzz/fizz_buzz_factory.rb'
-
-# Offense count: 1
-# Configuration parameters: ContextCreatingMethods, MethodCreatingMethods.
-Lint/UselessAccessModifier:
-  Exclude:
-    - 'lib/fizz_buzz/fizz_buzz_factory.rb'
-
-# Offense count: 3
 # Configuration parameters: CountComments, ExcludedMethods.
 Metrics/BlockLength:
   Max: 38
@@ -35,11 +24,6 @@ Style/Documentation:
     - 'test/**/*'
     - 'lib/bowling_game/game.rb'
     - 'lib/etude_for_ruby.rb'
-    - 'lib/fizz_buzz/buzz.rb'
-    - 'lib/fizz_buzz/fizz.rb'
-    - 'lib/fizz_buzz/fizz_buzz.rb'
-    - 'lib/fizz_buzz/fizz_buzz_factory.rb'
-    - 'lib/fizz_buzz/not_fizz_buzz.rb'
     - 'lib/shape/polymorphic_shape/circle.rb'
     - 'lib/shape/polymorphic_shape/rectangle.rb'
     - 'lib/shape/polymorphic_shape/shape.rb'
@@ -48,18 +32,3 @@ Style/Documentation:
     - 'lib/shape/procedural_shape/geometry.rb'
     - 'lib/shape/procedural_shape/rectangle.rb'
     - 'lib/shape/procedural_shape/square.rb'
-
-# Offense count: 1
-# Cop supports --auto-correct.
-Style/Encoding:
-  Exclude:
-    - 'etude_for_ruby.gemspec'
-
-# Offense count: 4
-# Cop supports --auto-correct.
-# Configuration parameters: AutoCorrect, EnforcedStyle, SupportedStyles.
-# SupportedStyles: predicate, comparison
-Style/NumericPredicate:
-  Exclude:
-    - 'spec/**/*'
-    - 'lib/fizz_buzz/fizz_buzz_factory.rb'
