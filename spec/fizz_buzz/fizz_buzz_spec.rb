@@ -11,6 +11,10 @@ RSpec.describe FizzBuzz do
       expect('fizz').to eq result
     end
     ## 5/5=Bizz
+    it 'return buzz' do
+      result = FizzBuzz.divide(5)
+      expect('buzz').to eq result
+    end
     ## 15/3=FizzBuzz
     ## 15/5=FizzBuzz
   end

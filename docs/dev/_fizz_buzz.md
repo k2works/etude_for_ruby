@@ -18,7 +18,7 @@ Fizz Buzz
 ## 設計
 ### TODOリスト
 + [ ] **割り算機能**
-  + [ ] ${3}\div{3}=Fizz$
+  + [x] ${3}\div{3}=Fizz$
   + [ ] ${5}\div{5}=Bizz$
   + [ ] ${15}\div{3}=FizzBuzz$
   + [ ] ${15}\div{5}=FizzBuzz$
@@ -55,6 +55,8 @@ class FizzBuzz {
 
 グリーンの状態になったら**仮実装を経て本実装へ**入る。**明白な実装**を行って最初の**TODOリスト**を片付ける。**条件分岐**と**演算子**を使って本実装を行う。**YAGNI**に従い今必要な機能だけを実装する。
 
+引き続き**TODOリスト**の２つ目に取り掛かる。**はじめのテスト**を失敗させる。
+
 ||||#1|
 |:---|:---|:---|:---|
 |原則|||
@@ -84,7 +86,7 @@ class FizzBuzz {
 ||プログラミング原則||
 |||KISS (Keep It Simple, Stupid. or Keep It Short and Simple)|
 |||DRY (Don't Repeat Yourself.)|
-|||YAGNI (You Aren't Going to Need It.)|
+|||YAGNI (You Aren't Going to Need It.)|o|
 |||PIE (Program Intently and Expressively.)|
 |||SLAP(Single Level of Abstraction Principle.)|
 |パターン|||
@@ -117,7 +119,7 @@ class FizzBuzz {
 ||グリーンバーのパターン|
 |||仮実装を経て本実装へ|o|
 |||三角測量|
-|||明白な実装|
+|||明白な実装|o|
 |||一から多へ|
 ||xUnitのパターン|
 |||アサーション|o|
