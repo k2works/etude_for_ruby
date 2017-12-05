@@ -3,6 +3,7 @@
 # FizzBuzz operation
 class FizzBuzz
   def self.divide(dividend)
-    'fizz' if (dividend % 3).zero?
+    return 'fizz' if (dividend % 3).zero?
+    return 'buzz' if (dividend % 5).zero?
   end
 end
