@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require 'etude_for_ruby/version'
-require 'fizz_buzz/fizz_buzz_factory'
 require 'bowling_game/game'
 require 'shape/polymorphic_shape/shape'
 require 'shape/polymorphic_shape/circle'

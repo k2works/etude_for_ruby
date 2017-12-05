@@ -11,6 +11,7 @@ group :development do
   gem 'guard'
   gem 'guard-rspec', require: false
   gem 'guard-yard'
+  gem 'overcommit', require: false
   gem 'pre-commit', require: false
   gem 'rubocop', require: false
 end

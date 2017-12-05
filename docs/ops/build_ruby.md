@@ -89,3 +89,11 @@ bundle exec pre-commit install
 ```
 
 + https://github.com/jish/pre-commit
+
+#### overcommit
+
+```bash
+gem install overcommit
+
++ https://github.com/brigade/overcommit#prepush
+```
