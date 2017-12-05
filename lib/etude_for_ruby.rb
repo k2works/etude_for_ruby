@@ -10,6 +10,7 @@ require 'shape/procedural_shape/geometry'
 require 'shape/procedural_shape/circle'
 require 'shape/procedural_shape/rectangle'
 require 'shape/procedural_shape/square'
+require 'fizz_buzz/fizz_buzz'
 
 module EtudeForRuby
   # Your code goes here...
