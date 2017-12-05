@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ProceduralShape
   class Geometry
     PI = 3.14

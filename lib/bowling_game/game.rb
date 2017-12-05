@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module BowlingGame
   class Game
     attr_reader :score

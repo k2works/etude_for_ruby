@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'fizz'
 require_relative 'buzz'
 require_relative 'fizz_buzz'
@@ -6,11 +8,11 @@ require_relative 'not_fizz_buzz'
 class FizzBuzzFactory
   def self.create(number)
     @number = number
-    if self.fizz?
+    if fizz?
       Fizz.new
-    elsif self.buzz?
+    elsif buzz?
       Buzz.new
-    elsif self.fizz_buzz?
+    elsif fizz_buzz?
       FizzBuzz.new
     else
       NotFizzBuzz.new
@@ -18,6 +20,7 @@ class FizzBuzzFactory
   end
 
   private
+
   def self.fizz?
     @number % 3 == 0 && @number % 5 != 0
   end

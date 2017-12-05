@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module PolymorphicShape
   class Rectangle < Shape
     attr_accessor :height, :width
