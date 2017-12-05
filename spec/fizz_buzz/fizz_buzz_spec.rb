@@ -23,5 +23,7 @@ RSpec.describe FizzBuzz do
     end
   end
   # Execute
-  ## 100回繰り返し実行する
+  describe '#execute' do
+    ## 100回繰り返し実行する
+  end
 end
