@@ -22,12 +22,11 @@ RSpec.describe FizzBuzz do
       expect('fizzbuzz').to eq result
     end
   end
-  # Execute
+
   describe '#execute' do
-    ## 100回繰り返し実行する
     it '100 times' do
       result = FizzBuzz.execute(100)
-      expect(result).to eq(100)
+      expect(result).to eq('buzz')
       result = FizzBuzz.execute(15)
       expect(result).to eq('fizzbuzz')
     end

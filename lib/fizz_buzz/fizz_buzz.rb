@@ -11,7 +11,7 @@ class FizzBuzz
   def self.execute(count)
     result = nil
     i = 1
-    while i < count
+    while i <= count
       result = divide(i)
       i += 1
     end
