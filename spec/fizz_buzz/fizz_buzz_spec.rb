@@ -4,31 +4,31 @@ require 'spec_helper'
 
 RSpec.describe FizzBuzz do
   describe '#divide' do
-    it 'return fizz' do
+    it 'return Fizz' do
       result = FizzBuzz.divide(3)
-      expect('fizz').to eq result
+      expect('Fizz').to eq result
     end
 
-    it 'return buzz' do
+    it 'return Buzz' do
       result = FizzBuzz.divide(5)
-      expect('buzz').to eq result
+      expect('Buzz').to eq result
     end
 
     it 'return fizzbuzz' do
       result = FizzBuzz.divide(15)
-      expect('fizzbuzz').to eq result
+      expect('FizzBuzz').to eq result
 
       result = FizzBuzz.divide(45)
-      expect('fizzbuzz').to eq result
+      expect('FizzBuzz').to eq result
     end
   end
 
   describe '#execute' do
     it '100 times' do
       result = FizzBuzz.execute(100)
-      expect(result).to eq('buzz')
+      expect(result).to eq('Buzz')
       result = FizzBuzz.execute(15)
-      expect(result).to eq('fizzbuzz')
+      expect(result).to eq('FizzBuzz')
     end
   end
 end

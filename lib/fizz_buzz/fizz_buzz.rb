@@ -3,9 +3,17 @@
 # FizzBuzz operation
 class FizzBuzz
   def self.divide(dividend)
-    return 'fizzbuzz' if (dividend % 3).zero? && (dividend % 5).zero?
-    return 'fizz' if (dividend % 3).zero?
-    return 'buzz' if (dividend % 5).zero?
+    if dividend % 3 == 0 && dividend % 5 == 0
+      return 'FizzBuzz'
+    end
+
+    if dividend % 3 == 0
+      return 'Fizz'
+    end
+
+    if dividend % 5 == 0
+      return 'Buzz'
+    end
   end
 
   def self.execute(count)
