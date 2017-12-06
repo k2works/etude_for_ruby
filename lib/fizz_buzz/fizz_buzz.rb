@@ -9,6 +9,12 @@ class FizzBuzz
   end
 
   def self.execute(count)
-    100
+    result = nil
+    i = 1
+    while i < count
+      result = divide(i)
+      i += 1
+    end
+    result
   end
 end

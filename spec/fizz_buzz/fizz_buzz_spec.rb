@@ -28,6 +28,8 @@ RSpec.describe FizzBuzz do
     it '100 times' do
       result = FizzBuzz.execute(100)
       expect(result).to eq(100)
+      result = FizzBuzz.execute(15)
+      expect(result).to eq('fizzbuzz')
     end
   end
 end
