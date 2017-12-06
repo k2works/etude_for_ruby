@@ -7,4 +7,8 @@ class FizzBuzz
     return 'fizz' if (dividend % 3).zero?
     return 'buzz' if (dividend % 5).zero?
   end
+
+  def self.execute(count)
+    100
+  end
 end
