@@ -21,14 +21,10 @@ RSpec.describe FizzBuzz do
       result = FizzBuzz.divide(45)
       expect('FizzBuzz').to eq result
     end
-  end
 
-  describe '#execute' do
-    it '100 times' do
-      result = FizzBuzz.execute(100)
-      expect(result).to eq('Buzz')
-      result = FizzBuzz.execute(15)
-      expect(result).to eq('FizzBuzz')
+    it 'return nil' do
+      result = FizzBuzz.divide(1)
+      expect(result).to be_nil
     end
   end
 end

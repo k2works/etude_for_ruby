@@ -55,10 +55,14 @@ end
 ```
 
 ## 実装
-### `FizzBuzzTest.java`
+### `FizzBuzzTest`
 @import "../../spec/fizz_buzz/fizz_buzz_spec.rb"
-### `FizzBuzz.java`
+### `FizzBuzzExecutorTest`
+@import "../../spec/fizz_buzz/fizz_buzz_executor_spec.rb"
+### `FizzBuzz`
 @import "../../lib/fizz_buzz/fizz_buzz.rb"
+### `FizzBuzzExecutor`
+@import "../../lib/fizz_buzz/fizz_buzz_executor.rb"
 
 
 ## [イテレーション１](https://github.com/k2works/etude_for_ruby/blob/feature/fizz_buzz/docs/dev/fizz_buzz.md#L396)
@@ -70,6 +74,8 @@ end
 条件に該当しない場合**例外**を返す仕様に変更したところ指定されてた回数実行する仕様を満たすことが難しくなることがわかった。**KISS**の原則したがって**疑似変数**のnilを返す仕様を明示的に実装する方針に変更した。
 
 機能の分割にあたってシーケンス図を作成して設計イメージを明確にする。
+
+**クラスの抽出**を実施したあとにテストを壊さないように**メソッドの移動**を実施する。リファクタリング実行後にテストを修正してグリーンの状態を維持する。
 
 ### ふりかえり
 #### KEEP
@@ -134,7 +140,7 @@ end
 |||冗長性|
 |||失敗|
 |||品質|
-|||ベイビーステップ|
+|||ベイビーステップ|o|
 |||責任の引受|
 |パターン|||
 ||テスト駆動開発のパターン||

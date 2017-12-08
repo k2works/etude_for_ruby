@@ -8,15 +8,7 @@ class FizzBuzz
     return 'Fizz' if (dividend % 3).zero?
 
     return 'Buzz' if (dividend % 5).zero?
-  end
 
-  def self.execute(count)
-    result = nil
-    i = 1
-    while i <= count
-      result = divide(i)
-      i += 1
-    end
-    result
+    nil
   end
 end
