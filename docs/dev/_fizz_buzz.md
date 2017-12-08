@@ -33,10 +33,24 @@ Fizz Buzz
 ### クラス図
 ```puml
 @startuml
+class FizzBuzzExecutor {
+  +{static}execute(count)  
+}
 class FizzBuzz {
   +{static}divide(dividend)
-  +{static}execute(count)
 }
+FizzBuzzExecutor -> FizzBuzz
+@enduml
+```
+### シーケンス図
+```puml
+@startuml
+-> FizzBuzzExecutor :execute
+loop count
+  FizzBuzzExecutor -> FizzBuzz :divide
+  FizzBuzzExecutor <-- FizzBuzz
+end
+<-- FizzBuzzExecutor :result
 @enduml
 ```
 
@@ -54,6 +68,8 @@ class FizzBuzz {
 作業を開始するにあたって**TODOリスト**を更新する。イテレーション１での確認事項の対応を決める。続いて**単一責任の原則**の基づいて設計を見直す。
 
 条件に該当しない場合**例外**を返す仕様に変更したところ指定されてた回数実行する仕様を満たすことが難しくなることがわかった。**KISS**の原則したがって**疑似変数**のnilを返す仕様を明示的に実装する方針に変更した。
+
+機能の分割にあたってシーケンス図を作成して設計イメージを明確にする。
 
 ### ふりかえり
 #### KEEP
@@ -124,7 +140,7 @@ class FizzBuzz {
 ||テスト駆動開発のパターン||
 |||テスト(名詞)|
 |||独立したテスト|
-|||TODOリスト|o|
+|||TODOリスト|o|o
 |||テストファースト|o|
 |||アサートファースト|o|
 |||テストデータ|
