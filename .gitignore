@@ -57,3 +57,5 @@ fabric.properties
 .vagrant
 etude_for_ruby-0.0.0.gem
 projectFilesBackup
+.floo
+.flooignore

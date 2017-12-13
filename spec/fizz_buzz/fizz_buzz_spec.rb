@@ -14,7 +14,7 @@ RSpec.describe FizzBuzz do
       expect('Buzz').to eq result
     end
 
-    it 'return fizzbuzz' do
+    it 'return FizzBuzz' do
       result = FizzBuzz.divide(15)
       expect('FizzBuzz').to eq result
 
