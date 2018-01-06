@@ -28,6 +28,9 @@ Fizz Buzz
 + [x] ~~３または５で割り切れない場合はどうするか~~
   + [x] nilを返す
 + [x] ~~繰り返し実行する機能と計算する機能を分離する~~
++ [ ] Strategyパターンの導入
++ [ ] ファクトリメソッドの導入
++ [ ] Null Objecパターンの導入
 
 
 ### クラス図
@@ -36,23 +39,114 @@ Fizz Buzz
 class FizzBuzzExecutor {
   +{static}execute(count)  
 }
-class FizzBuzz {
-  +{static}divide(dividend)
+class FizzBuzzValue {
+  +divide(dividend)
+  +{abstract}execute()
 }
-FizzBuzzExecutor -> FizzBuzz
+class Fizz {
+  +execute()
+}
+class Buzz {
+  +execute()
+}
+class FizzBuzz {
+  +execute()
+}
+class NullValue {
+  +execute()
+}
+FizzBuzzExecutor -> FizzBuzzValue
+FizzBuzzValue <|-- Fizz
+FizzBuzzValue <|-- Buzz
+FizzBuzzValue <|-- FizzBuzz
+FizzBuzzValue <|-- NullValue
 @enduml
 ```
 ### シーケンス図
 ```puml
 @startuml
+activate FizzBuzzExecutor
 -> FizzBuzzExecutor :execute
 loop count
-  FizzBuzzExecutor -> FizzBuzz :divide
-  FizzBuzzExecutor <-- FizzBuzz
+  FizzBuzzExecutor -> FizzBuzzValue :divide
+  activate FizzBuzzValue
+    FizzBuzzValue -> Fizz :new  
+    activate Fizz
+      Fizz --> FizzBuzzValue
+      FizzBuzzExecutor <-- FizzBuzzValue
+      FizzBuzzExecutor -> Fizz :execute
+      Fizz --> FizzBuzzExecutor
+    deactivate Fizz
+  deactivate FizzBuzzValue
 end
 <-- FizzBuzzExecutor :result
+deactivate FizzBuzzExecutor
 @enduml
 ```
+
+```puml
+@startuml
+activate FizzBuzzExecutor
+-> FizzBuzzExecutor :execute
+loop count
+  FizzBuzzExecutor -> FizzBuzzValue :divide
+  activate FizzBuzzValue
+    FizzBuzzValue -> Buzz :new  
+    activate Buzz
+      Buzz --> FizzBuzzValue
+      FizzBuzzExecutor <-- FizzBuzzValue
+      FizzBuzzExecutor -> Buzz :execute
+      Buzz --> FizzBuzzExecutor
+    deactivate Buzz
+  deactivate FizzBuzzValue
+end
+<-- FizzBuzzExecutor :result
+deactivate FizzBuzzExecutor
+@enduml
+```
+
+```puml
+@startuml
+activate FizzBuzzExecutor
+-> FizzBuzzExecutor :execute
+loop count
+  FizzBuzzExecutor -> FizzBuzzValue :divide
+  activate FizzBuzzValue
+    FizzBuzzValue -> FizzBuzz :new  
+    activate FizzBuzz
+      FizzBuzz --> FizzBuzzValue
+      FizzBuzzExecutor <-- FizzBuzzValue
+      FizzBuzzExecutor -> FizzBuzz :execute
+      FizzBuzz --> FizzBuzzExecutor
+    deactivate FizzBuzz
+  deactivate FizzBuzzValue
+end
+<-- FizzBuzzExecutor :result
+deactivate FizzBuzzExecutor
+@enduml
+```
+
+```puml
+@startuml
+activate FizzBuzzExecutor
+-> FizzBuzzExecutor :execute
+loop count
+  FizzBuzzExecutor -> FizzBuzzValue :divide
+  activate FizzBuzzValue
+    FizzBuzzValue -> NullValue :new  
+    activate NullValue
+      NullValue --> FizzBuzzValue
+      FizzBuzzExecutor <-- FizzBuzzValue
+      FizzBuzzExecutor -> NullValue :execute
+      NullValue --> FizzBuzzExecutor
+    deactivate NullValue
+  deactivate FizzBuzzValue
+end
+<-- FizzBuzzExecutor :result
+deactivate FizzBuzzExecutor
+@enduml
+```
+
 
 ## 実装
 ### `FizzBuzzTest`
@@ -68,6 +162,8 @@ end
 ## [イテレーション１](https://github.com/k2works/etude_for_ruby/blob/feature/fizz_buzz/docs/dev/fizz_buzz.md#L396)
 ## [イテレーション２](https://github.com/k2works/etude_for_ruby/blob/c21177218ec754274d170775613bd4adcdfe75d6/docs/dev/fizz_buzz.md)
 ## イテレーション３
+
+作業を開始するにあたって**TODOリスト**を更新する。まず**一つのプログラムには一つのことをうまくやらせる**基本定理に従いクラスの構造を見直して**単一責任の原則**に沿ったクラスの分割をする設計にした。
 
 ### ふりかえり
 
@@ -91,8 +187,8 @@ end
     + nilを理解する
 
 
-||||#1|#2|
-|:---|:---|:---|:---|:---|
+||||#1|#2|#3|
+|:---|:---|:---|:---|:---|:---|
 |原則|||
 ||基本定理||
 |||スモール・イズ・ビューティフル|
@@ -106,7 +202,7 @@ end
 |||すべてのプログラムをフィルタにする|
 ||アプリケーション設計原則||
 |||単一責任の原則(SRP)|o|o|
-|||オープン・クローズドの原則(OCP)|
+|||オープン・クローズドの原則(OCP)|||o
 |||リスコフの置換原則(LSP)|
 |||依存関係逆転の原則(DIP)|
 |||インタフェース分離の原則(ISP)|
@@ -179,9 +275,9 @@ end
 |||まとめてテスト|
 ||デザインパターン|
 |||Commandパターン|
-|||Value Objectパターン|
-|||Null Objectパターン|
-|||Template Methodパターン|
+|||Value Objectパターン|||o
+|||Null Objectパターン|||o
+|||Template Methodパターン|||o
 |||Pluggable Objectパターン|
 |||Factory Methodパターン|
 |||Imposterパターン|
