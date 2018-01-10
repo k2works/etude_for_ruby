@@ -33,20 +33,20 @@ Fizz Buzz
 ### クラス図
   
 
-![](assets/fizz_buzz/a3f7a2b5adc6a1c63cf76b9f21d259aa0.png?0.5216978379834636)  
+![](assets/fizz_buzz/a3f7a2b5adc6a1c63cf76b9f21d259aa0.png?0.48071382981485034)  
 ### シーケンス図
   
 
-![](assets/fizz_buzz/a3f7a2b5adc6a1c63cf76b9f21d259aa1.png?0.245103010655769)  
+![](assets/fizz_buzz/a3f7a2b5adc6a1c63cf76b9f21d259aa1.png?0.6418756096239173)  
   
 
-![](assets/fizz_buzz/a3f7a2b5adc6a1c63cf76b9f21d259aa2.png?0.3066872772994056)  
+![](assets/fizz_buzz/a3f7a2b5adc6a1c63cf76b9f21d259aa2.png?0.7474808129921406)  
   
 
-![](assets/fizz_buzz/a3f7a2b5adc6a1c63cf76b9f21d259aa3.png?0.45340564067462386)  
+![](assets/fizz_buzz/a3f7a2b5adc6a1c63cf76b9f21d259aa3.png?0.657886679261628)  
   
 
-![](assets/fizz_buzz/a3f7a2b5adc6a1c63cf76b9f21d259aa4.png?0.21142741762317252)  
+![](assets/fizz_buzz/a3f7a2b5adc6a1c63cf76b9f21d259aa4.png?0.19406692385811009)  
   
   
 ## 実装
@@ -80,6 +80,36 @@ RSpec.describe FizzBuzz do
   
     it 'return nil' do
       result = FizzBuzz.divide(1)
+      expect(result).to be_nil
+    end
+  end
+  
+  describe '#execute' do
+    it 'return Fizz' do
+      value = FizzBuzz.new(3)
+      result = value.execute
+      expect('Fizz').to eq result
+    end
+  
+    it 'return Buzz' do
+      value = FizzBuzz.new(5)
+      result = value.execute
+      expect('Buzz').to eq result
+    end
+  
+    it 'return FizzBuzz' do
+      value = FizzBuzz.new(15)
+      result = value.execute
+      expect('FizzBuzz').to eq result
+  
+      value = FizzBuzz.new(45)
+      result = value.execute
+      expect('FizzBuzz').to eq result
+    end
+  
+    it 'return nil' do
+      value = FizzBuzz.new(1)
+      result = value.execute
       expect(result).to be_nil
     end
   end
@@ -198,6 +228,8 @@ end
 **継承**を用いた**Strategyパターン**の**明白な実装**を行う。
   
 **FactoryMethodパターン**をクラスの**初期化**に実装して**Strategyパターン**オブジェクトを**インスタンス変数**に代入して**Commandパターン**を実行できるようにする。
+  
+**Strategyパターン**の実装に**メソッドの移動**を行うためテストを追加する。
   
 ### ふりかえり
   

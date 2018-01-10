@@ -169,6 +169,8 @@ deactivate FizzBuzzExecutor
 
 **FactoryMethodパターン**をクラスの**初期化**に実装して**Strategyパターン**オブジェクトを**インスタンス変数**に代入して**Commandパターン**を実行できるようにする。
 
+**Strategyパターン**の実装に**メソッドの移動**を行うためテストを追加する。
+
 ### ふりかえり
 
 #### KEEP
