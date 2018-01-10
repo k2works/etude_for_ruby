@@ -11,6 +11,10 @@ require 'shape/procedural_shape/circle'
 require 'shape/procedural_shape/rectangle'
 require 'shape/procedural_shape/square'
 require 'fizz_buzz/fizz_buzz'
+require 'fizz_buzz/fizz_value'
+require 'fizz_buzz/buzz_value'
+require 'fizz_buzz/fizz_buzz_value'
+require 'fizz_buzz/null_value'
 require 'fizz_buzz/fizz_buzz_executor'
 
 module EtudeForRuby

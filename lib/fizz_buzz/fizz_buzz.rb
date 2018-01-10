@@ -18,37 +18,3 @@ class FizzBuzz
     @value.execute
   end
 end
-
-# Fizz value object
-class FizzValue < FizzBuzz
-  def initialize; end
-
-  def execute
-    'Fizz'
-  end
-end
-
-# Buzz value object
-class BuzzValue < FizzBuzz
-  def initialize; end
-
-  def execute
-    'Buzz'
-  end
-end
-
-# FizzBuzz value object
-class FizzBuzzValue < FizzBuzz
-  def initialize; end
-
-  def execute
-    'FizzBuzz'
-  end
-end
-
-# Null object
-class NullValue < FizzBuzz
-  def initialize; end
-
-  def execute; end
-end

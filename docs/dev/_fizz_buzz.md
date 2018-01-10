@@ -62,6 +62,7 @@ FizzBuzz <|-- NullValue
 @enduml
 ```
 ### シーケンス図
+#### execute
 ```puml
 @startuml
 activate FizzBuzzExecutor
@@ -146,6 +147,14 @@ deactivate FizzBuzzExecutor
 @import "../../spec/fizz_buzz/fizz_buzz_executor_spec.rb"
 ### `FizzBuzz`
 @import "../../lib/fizz_buzz/fizz_buzz.rb"
+### `FizzValue`
+@import "../../lib/fizz_buzz/fizz_value.rb"
+### `Buzz`
+@import "../../lib/fizz_buzz/buzz_value.rb"
+### `FizzBuzzValue`
+@import "../../lib/fizz_buzz/fizz_buzz_value.rb"
+### `NullValue`
+@import "../../lib/fizz_buzz/null_value.rb"
 ### `FizzBuzzExecutor`
 @import "../../lib/fizz_buzz/fizz_buzz_executor.rb"
 
@@ -165,6 +174,8 @@ deactivate FizzBuzzExecutor
 3または5で割り切れない場合のテストが失敗したので**Null Objectパターン**を導入して3または5で割り切れない場合は何も返さないクラスを追加する。
 
 **メソッドの移動**完了後、不要となったメソッドを削除する。削除後にテストを実行してレグレッションが発生していないか確認する。レグレッションが発生した場合は**回帰テスト**を追加する。
+
+**単せ責任の原則**従い追加したクラスをファイル単位に分割する。新しいパターンが発生した場合は対象クラスを追加することで対応でき**オープン・クローズドの原則**に従った構造にした。
 
 ### ふりかえり
 

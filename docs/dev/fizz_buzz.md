@@ -33,20 +33,22 @@ Fizz Buzz
 ### クラス図
   
 
-![](assets/fizz_buzz/a3f7a2b5adc6a1c63cf76b9f21d259aa0.png?0.006993951202728388)  
+![](assets/fizz_buzz/a3f7a2b5adc6a1c63cf76b9f21d259aa0.png?0.31196659746838273)  
 ### シーケンス図
   
-
-![](assets/fizz_buzz/a3f7a2b5adc6a1c63cf76b9f21d259aa1.png?0.9310726679922205)  
+#### execute
   
 
-![](assets/fizz_buzz/a3f7a2b5adc6a1c63cf76b9f21d259aa2.png?0.8071863618900381)  
+![](assets/fizz_buzz/a3f7a2b5adc6a1c63cf76b9f21d259aa1.png?0.11718384427884665)  
   
 
-![](assets/fizz_buzz/a3f7a2b5adc6a1c63cf76b9f21d259aa3.png?0.574223126282994)  
+![](assets/fizz_buzz/a3f7a2b5adc6a1c63cf76b9f21d259aa2.png?0.12303736970648771)  
   
 
-![](assets/fizz_buzz/a3f7a2b5adc6a1c63cf76b9f21d259aa4.png?0.6844647231316141)  
+![](assets/fizz_buzz/a3f7a2b5adc6a1c63cf76b9f21d259aa3.png?0.9439155555519789)  
+  
+
+![](assets/fizz_buzz/a3f7a2b5adc6a1c63cf76b9f21d259aa4.png?0.8971634174169945)  
   
   
 ## 実装
@@ -134,6 +136,12 @@ class FizzBuzz
   end
 end
   
+```  
+### `FizzValue`
+  
+```rb
+# frozen_string_literal: true
+  
 # Fizz value object
 class FizzValue < FizzBuzz
   def initialize; end
@@ -142,6 +150,12 @@ class FizzValue < FizzBuzz
     'Fizz'
   end
 end
+  
+```  
+### `Buzz`
+  
+```rb
+# frozen_string_literal: true
   
 # Buzz value object
 class BuzzValue < FizzBuzz
@@ -152,6 +166,12 @@ class BuzzValue < FizzBuzz
   end
 end
   
+```  
+### `FizzBuzzValue`
+  
+```rb
+# frozen_string_literal: true
+  
 # FizzBuzz value object
 class FizzBuzzValue < FizzBuzz
   def initialize; end
@@ -160,6 +180,12 @@ class FizzBuzzValue < FizzBuzz
     'FizzBuzz'
   end
 end
+  
+```  
+### `NullValue`
+  
+```rb
+# frozen_string_literal: true
   
 # Null object
 class NullValue < FizzBuzz
@@ -209,6 +235,8 @@ end
 3または5で割り切れない場合のテストが失敗したので**Null Objectパターン**を導入して3または5で割り切れない場合は何も返さないクラスを追加する。
   
 **メソッドの移動**完了後、不要となったメソッドを削除する。削除後にテストを実行してレグレッションが発生していないか確認する。レグレッションが発生した場合は**回帰テスト**を追加する。
+  
+**単せ責任の原則**従い追加したクラスをファイル単位に分割する。新しいパターンが発生した場合は対象クラスを追加することで対応でき**オープン・クローズドの原則**に従った構造にした。
   
 ### ふりかえり
   
