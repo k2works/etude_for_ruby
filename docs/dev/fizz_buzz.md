@@ -25,7 +25,7 @@ Fizz Buzz
 + [x] ~~３または５で割り切れない場合はどうするか~~
   + [x] nilを返す
 + [x] ~~繰り返し実行する機能と計算する機能を分離する~~
-+ [ ] Strategyパターンの導入
++ [ ] **Strategyパターンの導入**
 + [ ] ファクトリメソッドの導入
 + [ ] Null Objecパターンの導入
   
@@ -33,20 +33,20 @@ Fizz Buzz
 ### クラス図
   
 
-![](assets/fizz_buzz/a3f7a2b5adc6a1c63cf76b9f21d259aa0.png?0.8823353629796025)  
+![](assets/fizz_buzz/a3f7a2b5adc6a1c63cf76b9f21d259aa0.png?0.23505378676343458)  
 ### シーケンス図
   
 
-![](assets/fizz_buzz/a3f7a2b5adc6a1c63cf76b9f21d259aa1.png?0.12761860311800421)  
+![](assets/fizz_buzz/a3f7a2b5adc6a1c63cf76b9f21d259aa1.png?0.14535521807348184)  
   
 
-![](assets/fizz_buzz/a3f7a2b5adc6a1c63cf76b9f21d259aa2.png?0.15541765202921165)  
+![](assets/fizz_buzz/a3f7a2b5adc6a1c63cf76b9f21d259aa2.png?0.968955848866659)  
   
 
-![](assets/fizz_buzz/a3f7a2b5adc6a1c63cf76b9f21d259aa3.png?0.7800081482758063)  
+![](assets/fizz_buzz/a3f7a2b5adc6a1c63cf76b9f21d259aa3.png?0.6880951342806902)  
   
 
-![](assets/fizz_buzz/a3f7a2b5adc6a1c63cf76b9f21d259aa4.png?0.9671016582463434)  
+![](assets/fizz_buzz/a3f7a2b5adc6a1c63cf76b9f21d259aa4.png?0.20389702035537693)  
   
   
 ## 実装
@@ -121,6 +121,23 @@ class FizzBuzz
   
     nil
   end
+  
+  def execute; end
+end
+  
+# Fizz value object
+class FizzValue < FizzBuzz
+  def execute; end
+end
+  
+# Buzz value object
+class BuzzValue < FizzBuzz
+  def execute; end
+end
+  
+# FizzBuzz value object
+class FizzBuzzValue < FizzBuzz
+  def execute; end
 end
   
 ```  
@@ -153,6 +170,8 @@ end
   
   
 作業を開始するにあたって**TODOリスト**を更新する。まず**一つのプログラムには一つのことをうまくやらせる**基本定理に従いクラスの構造を見直して**単一責任の原則**に沿ったクラスの分割をする設計にした。
+  
+**継承**を用いた**Strategyパターン**の**明白な実装**を行う。
   
 ### ふりかえり
   
@@ -231,7 +250,7 @@ end
 ||テスト駆動開発のパターン||
 |||テスト(名詞)|
 |||独立したテスト|
-|||TODOリスト|o|o
+|||TODOリスト|o|o|o
 |||テストファースト|o|
 |||アサートファースト|o|
 |||テストデータ|
@@ -257,7 +276,7 @@ end
 ||グリーンバーのパターン|
 |||仮実装を経て本実装へ|o|o|
 |||三角測量|o|
-|||明白な実装|o|
+|||明白な実装|o||o
 |||一から多へ|
 ||xUnitのパターン|
 |||アサーション|o|
@@ -276,6 +295,7 @@ end
 |||Imposterパターン|
 |||Collecting Parameterパターン|
 |||Singletonパターン|
+|||Strategyパターン|||o
 |実践|||
 ||XP||
 ||主要プラクティス   |     |     |     |     |     |     |     |

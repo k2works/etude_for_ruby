@@ -28,7 +28,7 @@ Fizz Buzz
 + [x] ~~３または５で割り切れない場合はどうするか~~
   + [x] nilを返す
 + [x] ~~繰り返し実行する機能と計算する機能を分離する~~
-+ [ ] Strategyパターンの導入
++ [ ] **Strategyパターンの導入**
 + [ ] ファクトリメソッドの導入
 + [ ] Null Objecパターンの導入
 
@@ -39,7 +39,7 @@ Fizz Buzz
 class FizzBuzzExecutor {
   +{static}execute(count)  
 }
-class FizzBuzzValue {
+class FizzBuzz {
   +divide(dividend)
   +{abstract}execute()
 }
@@ -49,17 +49,17 @@ class Fizz {
 class Buzz {
   +execute()
 }
-class FizzBuzz {
+class FizzBuzzValue {
   +execute()
 }
 class NullValue {
   +execute()
 }
-FizzBuzzExecutor -> FizzBuzzValue
-FizzBuzzValue <|-- Fizz
-FizzBuzzValue <|-- Buzz
-FizzBuzzValue <|-- FizzBuzz
-FizzBuzzValue <|-- NullValue
+FizzBuzzExecutor -> FizzBuzz
+FizzBuzz <|-- Fizz
+FizzBuzz <|-- Buzz
+FizzBuzz <|-- FizzBuzzValue
+FizzBuzz <|-- NullValue
 @enduml
 ```
 ### シーケンス図
@@ -68,15 +68,57 @@ FizzBuzzValue <|-- NullValue
 activate FizzBuzzExecutor
 -> FizzBuzzExecutor :execute
 loop count
-  FizzBuzzExecutor -> FizzBuzzValue :divide
-  activate FizzBuzzValue
-    FizzBuzzValue -> Fizz :new  
-    activate Fizz
-      Fizz --> FizzBuzzValue
-      FizzBuzzExecutor <-- FizzBuzzValue
-      FizzBuzzExecutor -> Fizz :execute
-      Fizz --> FizzBuzzExecutor
-    deactivate Fizz
+  FizzBuzzExecutor -> FizzBuzz :divide
+  activate FizzBuzz
+    FizzBuzz -> FizzValue :new  
+    activate FizzValue
+      FizzValue --> FizzBuzz
+      FizzBuzzExecutor <-- FizzBuzz
+      FizzBuzzExecutor -> FizzValue :execute
+      FizzValue --> FizzBuzzExecutor
+    deactivate FizzValue
+  deactivate FizzBuzz
+end
+<-- FizzBuzzExecutor :result
+deactivate FizzBuzzExecutor
+@enduml
+```
+
+```puml
+@startuml
+activate FizzBuzzExecutor
+-> FizzBuzzExecutor :execute
+loop count
+  FizzBuzzExecutor -> FizzBuzz :divide
+  activate FizzBuzz
+    FizzBuzz -> BuzzValue :new  
+    activate BuzzValue
+      BuzzValue --> FizzBuzz
+      FizzBuzzExecutor <-- FizzBuzz
+      FizzBuzzExecutor -> BuzzValue :execute
+      BuzzValue --> FizzBuzzExecutor
+    deactivate BuzzValue
+  deactivate FizzBuzz
+end
+<-- FizzBuzzExecutor :result
+deactivate FizzBuzzExecutor
+@enduml
+```
+
+```puml
+@startuml
+activate FizzBuzzExecutor
+-> FizzBuzzExecutor :execute
+loop count
+  FizzBuzzExecutor -> FizzBuzz :divide
+  activate FizzBuzz
+    FizzBuzz -> FizzBuzzValue :new  
+    activate FizzBuzzValue
+      FizzBuzzValue --> FizzBuzz
+      FizzBuzzExecutor <-- FizzBuzz
+      FizzBuzzExecutor -> FizzBuzzValue :execute
+      FizzBuzzValue --> FizzBuzzExecutor
+    deactivate FizzBuzzValue
   deactivate FizzBuzzValue
 end
 <-- FizzBuzzExecutor :result
@@ -89,58 +131,16 @@ deactivate FizzBuzzExecutor
 activate FizzBuzzExecutor
 -> FizzBuzzExecutor :execute
 loop count
-  FizzBuzzExecutor -> FizzBuzzValue :divide
-  activate FizzBuzzValue
-    FizzBuzzValue -> Buzz :new  
-    activate Buzz
-      Buzz --> FizzBuzzValue
-      FizzBuzzExecutor <-- FizzBuzzValue
-      FizzBuzzExecutor -> Buzz :execute
-      Buzz --> FizzBuzzExecutor
-    deactivate Buzz
-  deactivate FizzBuzzValue
-end
-<-- FizzBuzzExecutor :result
-deactivate FizzBuzzExecutor
-@enduml
-```
-
-```puml
-@startuml
-activate FizzBuzzExecutor
--> FizzBuzzExecutor :execute
-loop count
-  FizzBuzzExecutor -> FizzBuzzValue :divide
-  activate FizzBuzzValue
-    FizzBuzzValue -> FizzBuzz :new  
-    activate FizzBuzz
-      FizzBuzz --> FizzBuzzValue
-      FizzBuzzExecutor <-- FizzBuzzValue
-      FizzBuzzExecutor -> FizzBuzz :execute
-      FizzBuzz --> FizzBuzzExecutor
-    deactivate FizzBuzz
-  deactivate FizzBuzzValue
-end
-<-- FizzBuzzExecutor :result
-deactivate FizzBuzzExecutor
-@enduml
-```
-
-```puml
-@startuml
-activate FizzBuzzExecutor
--> FizzBuzzExecutor :execute
-loop count
-  FizzBuzzExecutor -> FizzBuzzValue :divide
-  activate FizzBuzzValue
-    FizzBuzzValue -> NullValue :new  
+  FizzBuzzExecutor -> FizzBuzz :divide
+  activate FizzBuzz
+    FizzBuzz -> NullValue :new  
     activate NullValue
-      NullValue --> FizzBuzzValue
-      FizzBuzzExecutor <-- FizzBuzzValue
+      NullValue --> FizzBuzz
+      FizzBuzzExecutor <-- FizzBuzz
       FizzBuzzExecutor -> NullValue :execute
       NullValue --> FizzBuzzExecutor
     deactivate NullValue
-  deactivate FizzBuzzValue
+  deactivate FizzBuzz
 end
 <-- FizzBuzzExecutor :result
 deactivate FizzBuzzExecutor
@@ -164,6 +164,8 @@ deactivate FizzBuzzExecutor
 ## イテレーション３
 
 作業を開始するにあたって**TODOリスト**を更新する。まず**一つのプログラムには一つのことをうまくやらせる**基本定理に従いクラスの構造を見直して**単一責任の原則**に沿ったクラスの分割をする設計にした。
+
+**継承**を用いた**Strategyパターン**の**明白な実装**を行う。
 
 ### ふりかえり
 
@@ -238,7 +240,7 @@ deactivate FizzBuzzExecutor
 ||テスト駆動開発のパターン||
 |||テスト(名詞)|
 |||独立したテスト|
-|||TODOリスト|o|o
+|||TODOリスト|o|o|o
 |||テストファースト|o|
 |||アサートファースト|o|
 |||テストデータ|
@@ -264,7 +266,7 @@ deactivate FizzBuzzExecutor
 ||グリーンバーのパターン|
 |||仮実装を経て本実装へ|o|o|
 |||三角測量|o|
-|||明白な実装|o|
+|||明白な実装|o||o
 |||一から多へ|
 ||xUnitのパターン|
 |||アサーション|o|
@@ -283,6 +285,7 @@ deactivate FizzBuzzExecutor
 |||Imposterパターン|
 |||Collecting Parameterパターン|
 |||Singletonパターン|
+|||Strategyパターン|||o
 |実践|||
 ||XP||
 ||主要プラクティス   |     |     |     |     |     |     |     |

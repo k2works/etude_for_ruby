@@ -11,4 +11,21 @@ class FizzBuzz
 
     nil
   end
+
+  def execute; end
+end
+
+# Fizz value object
+class FizzValue < FizzBuzz
+  def execute; end
+end
+
+# Buzz value object
+class BuzzValue < FizzBuzz
+  def execute; end
+end
+
+# FizzBuzz value object
+class FizzBuzzValue < FizzBuzz
+  def execute; end
 end
