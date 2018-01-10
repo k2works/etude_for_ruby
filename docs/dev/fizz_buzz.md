@@ -26,27 +26,27 @@ Fizz Buzz
   + [x] nilを返す
 + [x] ~~繰り返し実行する機能と計算する機能を分離する~~
 + [ ] **Strategyパターンの導入**
-+ [ ] ファクトリメソッドの導入
++ [x] ~~ファクトリメソッドの導入~~
 + [ ] Null Objecパターンの導入
   
   
 ### クラス図
   
 
-![](assets/fizz_buzz/a3f7a2b5adc6a1c63cf76b9f21d259aa0.png?0.23505378676343458)  
+![](assets/fizz_buzz/a3f7a2b5adc6a1c63cf76b9f21d259aa0.png?0.5216978379834636)  
 ### シーケンス図
   
 
-![](assets/fizz_buzz/a3f7a2b5adc6a1c63cf76b9f21d259aa1.png?0.14535521807348184)  
+![](assets/fizz_buzz/a3f7a2b5adc6a1c63cf76b9f21d259aa1.png?0.245103010655769)  
   
 
-![](assets/fizz_buzz/a3f7a2b5adc6a1c63cf76b9f21d259aa2.png?0.968955848866659)  
+![](assets/fizz_buzz/a3f7a2b5adc6a1c63cf76b9f21d259aa2.png?0.3066872772994056)  
   
 
-![](assets/fizz_buzz/a3f7a2b5adc6a1c63cf76b9f21d259aa3.png?0.6880951342806902)  
+![](assets/fizz_buzz/a3f7a2b5adc6a1c63cf76b9f21d259aa3.png?0.45340564067462386)  
   
 
-![](assets/fizz_buzz/a3f7a2b5adc6a1c63cf76b9f21d259aa4.png?0.20389702035537693)  
+![](assets/fizz_buzz/a3f7a2b5adc6a1c63cf76b9f21d259aa4.png?0.21142741762317252)  
   
   
 ## 実装
@@ -112,6 +112,20 @@ end
   
 # FizzBuzz operation
 class FizzBuzz
+  def initialize(dividend)
+    @value = if (dividend % 3).zero? && (dividend % 5).zero?
+               FizzBuzzValue.new
+             elsif (dividend % 3).zero?
+               FizzValue.new
+             elsif (dividend % 5).zero?
+               BuzzValue.new
+             end
+  end
+  
+  def execute
+    @value.execute
+  end
+  
   def self.divide(dividend)
     return 'FizzBuzz' if (dividend % 3).zero? && (dividend % 5).zero?
   
@@ -121,23 +135,33 @@ class FizzBuzz
   
     nil
   end
-  
-  def execute; end
 end
   
 # Fizz value object
 class FizzValue < FizzBuzz
-  def execute; end
+  def initialize; end
+  
+  def execute
+    'Fizz'
+  end
 end
   
 # Buzz value object
 class BuzzValue < FizzBuzz
-  def execute; end
+  def initialize; end
+  
+  def execute
+    'Buzz'
+  end
 end
   
 # FizzBuzz value object
 class FizzBuzzValue < FizzBuzz
-  def execute; end
+  def initialize; end
+  
+  def execute
+    'FizzBuzz'
+  end
 end
   
 ```  
@@ -172,6 +196,8 @@ end
 作業を開始するにあたって**TODOリスト**を更新する。まず**一つのプログラムには一つのことをうまくやらせる**基本定理に従いクラスの構造を見直して**単一責任の原則**に沿ったクラスの分割をする設計にした。
   
 **継承**を用いた**Strategyパターン**の**明白な実装**を行う。
+  
+**FactoryMethodパターン**をクラスの**初期化**に実装して**Strategyパターン**オブジェクトを**インスタンス変数**に代入して**Commandパターン**を実行できるようにする。
   
 ### ふりかえり
   
@@ -286,7 +312,7 @@ end
 |||例外のテスト|
 |||まとめてテスト|
 ||デザインパターン|
-|||Commandパターン|
+|||Commandパターン|||o
 |||Value Objectパターン|||o
 |||Null Objectパターン|||o
 |||Template Methodパターン|||o
@@ -460,12 +486,12 @@ end
 ||式          | |o     |     |
 ||クラス       ||     |     |     |     |    |     |
 ||            |クラスの定義式|o     |     |     |     |     |     |
-||            |インスタンス変数|     |     |     |     |     |     |
+||            |インスタンス変数|     |     |o     |     |     |     |
 ||            |self|o     |     |     |     |     |     |
-||            |初期化|     |     |     |     |     |     |
+||            |初期化|     |     |o     |     |     |     |
 ||            |クラスメソッド|o     |     |     |     |     |     |
 ||            |クラス変数|     |     |     |     |     |     |
-||            |継承|     |     |     |     |     |     |
+||            |継承|     |     |o     |     |     |     |
 ||モジュール    ||     |     |     |     |     |     |
 ||            |モジュールの定義式|     |     |     |     |     |     |
 ||主な組み込みクラス            ||     |     |     |     |     |     |

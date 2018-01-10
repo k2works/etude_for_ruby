@@ -29,7 +29,7 @@ Fizz Buzz
   + [x] nilを返す
 + [x] ~~繰り返し実行する機能と計算する機能を分離する~~
 + [ ] **Strategyパターンの導入**
-+ [ ] ファクトリメソッドの導入
++ [x] ~~ファクトリメソッドの導入~~
 + [ ] Null Objecパターンの導入
 
 
@@ -43,10 +43,10 @@ class FizzBuzz {
   +divide(dividend)
   +{abstract}execute()
 }
-class Fizz {
+class FizzValue {
   +execute()
 }
-class Buzz {
+class BuzzValue {
   +execute()
 }
 class FizzBuzzValue {
@@ -56,8 +56,8 @@ class NullValue {
   +execute()
 }
 FizzBuzzExecutor -> FizzBuzz
-FizzBuzz <|-- Fizz
-FizzBuzz <|-- Buzz
+FizzBuzz <|-- FizzValue
+FizzBuzz <|-- BuzzValue
 FizzBuzz <|-- FizzBuzzValue
 FizzBuzz <|-- NullValue
 @enduml
@@ -166,6 +166,8 @@ deactivate FizzBuzzExecutor
 作業を開始するにあたって**TODOリスト**を更新する。まず**一つのプログラムには一つのことをうまくやらせる**基本定理に従いクラスの構造を見直して**単一責任の原則**に沿ったクラスの分割をする設計にした。
 
 **継承**を用いた**Strategyパターン**の**明白な実装**を行う。
+
+**FactoryMethodパターン**をクラスの**初期化**に実装して**Strategyパターン**オブジェクトを**インスタンス変数**に代入して**Commandパターン**を実行できるようにする。
 
 ### ふりかえり
 
@@ -276,7 +278,7 @@ deactivate FizzBuzzExecutor
 |||例外のテスト|
 |||まとめてテスト|
 ||デザインパターン|
-|||Commandパターン|
+|||Commandパターン|||o
 |||Value Objectパターン|||o
 |||Null Objectパターン|||o
 |||Template Methodパターン|||o
@@ -450,12 +452,12 @@ deactivate FizzBuzzExecutor
 ||式          | |o     |     |
 ||クラス       ||     |     |     |     |    |     |
 ||            |クラスの定義式|o     |     |     |     |     |     |
-||            |インスタンス変数|     |     |     |     |     |     |
+||            |インスタンス変数|     |     |o     |     |     |     |
 ||            |self|o     |     |     |     |     |     |
-||            |初期化|     |     |     |     |     |     |
+||            |初期化|     |     |o     |     |     |     |
 ||            |クラスメソッド|o     |     |     |     |     |     |
 ||            |クラス変数|     |     |     |     |     |     |
-||            |継承|     |     |     |     |     |     |
+||            |継承|     |     |o     |     |     |     |
 ||モジュール    ||     |     |     |     |     |     |
 ||            |モジュールの定義式|     |     |     |     |     |     |
 ||主な組み込みクラス            ||     |     |     |     |     |     |
