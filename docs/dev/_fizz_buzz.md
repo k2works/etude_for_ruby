@@ -28,9 +28,9 @@ Fizz Buzz
 + [x] ~~３または５で割り切れない場合はどうするか~~
   + [x] nilを返す
 + [x] ~~繰り返し実行する機能と計算する機能を分離する~~
-+ [ ] **Strategyパターンの導入**
-+ [x] ~~ファクトリメソッドの導入~~
-+ [x] ~~Null Objecパターンの導入~~
++ [x] ~~Strategyパターンの導入~~
+  + [x] ファクトリメソッドの導入
+  + [x] Null Objecパターンの導入
 
 
 ### クラス図
@@ -40,8 +40,7 @@ class FizzBuzzExecutor {
   +{static}execute(count)  
 }
 class FizzBuzz {
-  +divide(dividend)
-  +{abstract}execute()
+  +execute()
 }
 class FizzValue {
   +execute()
@@ -68,14 +67,12 @@ FizzBuzz <|-- NullValue
 activate FizzBuzzExecutor
 -> FizzBuzzExecutor :execute
 loop count
-  FizzBuzzExecutor -> FizzBuzz :divide
+  FizzBuzzExecutor -> FizzBuzz :execute
   activate FizzBuzz
     FizzBuzz -> FizzValue :new  
     activate FizzValue
       FizzValue --> FizzBuzz
       FizzBuzzExecutor <-- FizzBuzz
-      FizzBuzzExecutor -> FizzValue :execute
-      FizzValue --> FizzBuzzExecutor
     deactivate FizzValue
   deactivate FizzBuzz
 end
@@ -89,14 +86,12 @@ deactivate FizzBuzzExecutor
 activate FizzBuzzExecutor
 -> FizzBuzzExecutor :execute
 loop count
-  FizzBuzzExecutor -> FizzBuzz :divide
+  FizzBuzzExecutor -> FizzBuzz :execute
   activate FizzBuzz
     FizzBuzz -> BuzzValue :new  
     activate BuzzValue
       BuzzValue --> FizzBuzz
       FizzBuzzExecutor <-- FizzBuzz
-      FizzBuzzExecutor -> BuzzValue :execute
-      BuzzValue --> FizzBuzzExecutor
     deactivate BuzzValue
   deactivate FizzBuzz
 end
@@ -110,14 +105,12 @@ deactivate FizzBuzzExecutor
 activate FizzBuzzExecutor
 -> FizzBuzzExecutor :execute
 loop count
-  FizzBuzzExecutor -> FizzBuzz :divide
+  FizzBuzzExecutor -> FizzBuzz :execute
   activate FizzBuzz
     FizzBuzz -> FizzBuzzValue :new  
     activate FizzBuzzValue
       FizzBuzzValue --> FizzBuzz
       FizzBuzzExecutor <-- FizzBuzz
-      FizzBuzzExecutor -> FizzBuzzValue :execute
-      FizzBuzzValue --> FizzBuzzExecutor
     deactivate FizzBuzzValue
   deactivate FizzBuzzValue
 end
@@ -131,14 +124,12 @@ deactivate FizzBuzzExecutor
 activate FizzBuzzExecutor
 -> FizzBuzzExecutor :execute
 loop count
-  FizzBuzzExecutor -> FizzBuzz :divide
+  FizzBuzzExecutor -> FizzBuzz :execute
   activate FizzBuzz
     FizzBuzz -> NullValue :new  
     activate NullValue
       NullValue --> FizzBuzz
       FizzBuzzExecutor <-- FizzBuzz
-      FizzBuzzExecutor -> NullValue :execute
-      NullValue --> FizzBuzzExecutor
     deactivate NullValue
   deactivate FizzBuzz
 end
@@ -172,6 +163,8 @@ deactivate FizzBuzzExecutor
 **Strategyパターン**の実装に**メソッドの移動**を行うためテストを追加する。
 
 3または5で割り切れない場合のテストが失敗したので**Null Objectパターン**を導入して3または5で割り切れない場合は何も返さないクラスを追加する。
+
+**メソッドの移動**完了後、不要となったメソッドを削除する。削除後にテストを実行してレグレッションが発生していないか確認する。レグレッションが発生した場合は**回帰テスト**を追加する。
 
 ### ふりかえり
 

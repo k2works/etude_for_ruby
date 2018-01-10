@@ -6,7 +6,8 @@ class FizzBuzzExecutor
     result = nil
     i = 1
     while i <= count
-      result = FizzBuzz.divide(i)
+      value = FizzBuzz.new(i)
+      result = value.execute
       i += 1
     end
     result

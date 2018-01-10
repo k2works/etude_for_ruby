@@ -25,28 +25,28 @@ Fizz Buzz
 + [x] ~~３または５で割り切れない場合はどうするか~~
   + [x] nilを返す
 + [x] ~~繰り返し実行する機能と計算する機能を分離する~~
-+ [ ] **Strategyパターンの導入**
-+ [x] ~~ファクトリメソッドの導入~~
-+ [x] ~~Null Objecパターンの導入~~
++ [x] ~~Strategyパターンの導入~~
+  + [x] ファクトリメソッドの導入
+  + [x] Null Objecパターンの導入
   
   
 ### クラス図
   
 
-![](assets/fizz_buzz/a3f7a2b5adc6a1c63cf76b9f21d259aa0.png?0.8530075366792125)  
+![](assets/fizz_buzz/a3f7a2b5adc6a1c63cf76b9f21d259aa0.png?0.006993951202728388)  
 ### シーケンス図
   
 
-![](assets/fizz_buzz/a3f7a2b5adc6a1c63cf76b9f21d259aa1.png?0.3699274597478639)  
+![](assets/fizz_buzz/a3f7a2b5adc6a1c63cf76b9f21d259aa1.png?0.9310726679922205)  
   
 
-![](assets/fizz_buzz/a3f7a2b5adc6a1c63cf76b9f21d259aa2.png?0.5322873685732306)  
+![](assets/fizz_buzz/a3f7a2b5adc6a1c63cf76b9f21d259aa2.png?0.8071863618900381)  
   
 
-![](assets/fizz_buzz/a3f7a2b5adc6a1c63cf76b9f21d259aa3.png?0.2578822279407116)  
+![](assets/fizz_buzz/a3f7a2b5adc6a1c63cf76b9f21d259aa3.png?0.574223126282994)  
   
 
-![](assets/fizz_buzz/a3f7a2b5adc6a1c63cf76b9f21d259aa4.png?0.9669664753695029)  
+![](assets/fizz_buzz/a3f7a2b5adc6a1c63cf76b9f21d259aa4.png?0.6844647231316141)  
   
   
 ## 実装
@@ -59,31 +59,6 @@ Fizz Buzz
 require 'spec_helper'
   
 RSpec.describe FizzBuzz do
-  describe '#divide' do
-    it 'return Fizz' do
-      result = FizzBuzz.divide(3)
-      expect('Fizz').to eq result
-    end
-  
-    it 'return Buzz' do
-      result = FizzBuzz.divide(5)
-      expect('Buzz').to eq result
-    end
-  
-    it 'return FizzBuzz' do
-      result = FizzBuzz.divide(15)
-      expect('FizzBuzz').to eq result
-  
-      result = FizzBuzz.divide(45)
-      expect('FizzBuzz').to eq result
-    end
-  
-    it 'return nil' do
-      result = FizzBuzz.divide(1)
-      expect(result).to be_nil
-    end
-  end
-  
   describe '#execute' do
     it 'return Fizz' do
       value = FizzBuzz.new(3)
@@ -157,16 +132,6 @@ class FizzBuzz
   def execute
     @value.execute
   end
-  
-  def self.divide(dividend)
-    return 'FizzBuzz' if (dividend % 3).zero? && (dividend % 5).zero?
-  
-    return 'Fizz' if (dividend % 3).zero?
-  
-    return 'Buzz' if (dividend % 5).zero?
-  
-    nil
-  end
 end
   
 # Fizz value object
@@ -215,7 +180,8 @@ class FizzBuzzExecutor
     result = nil
     i = 1
     while i <= count
-      result = FizzBuzz.divide(i)
+      value = FizzBuzz.new(i)
+      result = value.execute
       i += 1
     end
     result
@@ -241,6 +207,8 @@ end
 **Strategyパターン**の実装に**メソッドの移動**を行うためテストを追加する。
   
 3または5で割り切れない場合のテストが失敗したので**Null Objectパターン**を導入して3または5で割り切れない場合は何も返さないクラスを追加する。
+  
+**メソッドの移動**完了後、不要となったメソッドを削除する。削除後にテストを実行してレグレッションが発生していないか確認する。レグレッションが発生した場合は**回帰テスト**を追加する。
   
 ### ふりかえり
   
