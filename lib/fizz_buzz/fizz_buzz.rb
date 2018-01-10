@@ -9,6 +9,8 @@ class FizzBuzz
                FizzValue.new
              elsif (dividend % 5).zero?
                BuzzValue.new
+             else
+               NullValue.new
              end
   end
 
@@ -52,4 +54,11 @@ class FizzBuzzValue < FizzBuzz
   def execute
     'FizzBuzz'
   end
+end
+
+# Null object
+class NullValue < FizzBuzz
+  def initialize; end
+
+  def execute; end
 end

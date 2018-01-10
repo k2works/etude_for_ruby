@@ -27,26 +27,26 @@ Fizz Buzz
 + [x] ~~繰り返し実行する機能と計算する機能を分離する~~
 + [ ] **Strategyパターンの導入**
 + [x] ~~ファクトリメソッドの導入~~
-+ [ ] Null Objecパターンの導入
++ [x] ~~Null Objecパターンの導入~~
   
   
 ### クラス図
   
 
-![](assets/fizz_buzz/a3f7a2b5adc6a1c63cf76b9f21d259aa0.png?0.48071382981485034)  
+![](assets/fizz_buzz/a3f7a2b5adc6a1c63cf76b9f21d259aa0.png?0.8530075366792125)  
 ### シーケンス図
   
 
-![](assets/fizz_buzz/a3f7a2b5adc6a1c63cf76b9f21d259aa1.png?0.6418756096239173)  
+![](assets/fizz_buzz/a3f7a2b5adc6a1c63cf76b9f21d259aa1.png?0.3699274597478639)  
   
 
-![](assets/fizz_buzz/a3f7a2b5adc6a1c63cf76b9f21d259aa2.png?0.7474808129921406)  
+![](assets/fizz_buzz/a3f7a2b5adc6a1c63cf76b9f21d259aa2.png?0.5322873685732306)  
   
 
-![](assets/fizz_buzz/a3f7a2b5adc6a1c63cf76b9f21d259aa3.png?0.657886679261628)  
+![](assets/fizz_buzz/a3f7a2b5adc6a1c63cf76b9f21d259aa3.png?0.2578822279407116)  
   
 
-![](assets/fizz_buzz/a3f7a2b5adc6a1c63cf76b9f21d259aa4.png?0.19406692385811009)  
+![](assets/fizz_buzz/a3f7a2b5adc6a1c63cf76b9f21d259aa4.png?0.9669664753695029)  
   
   
 ## 実装
@@ -149,6 +149,8 @@ class FizzBuzz
                FizzValue.new
              elsif (dividend % 5).zero?
                BuzzValue.new
+             else
+               NullValue.new
              end
   end
   
@@ -194,6 +196,13 @@ class FizzBuzzValue < FizzBuzz
   end
 end
   
+# Null object
+class NullValue < FizzBuzz
+  def initialize; end
+  
+  def execute; end
+end
+  
 ```  
 ### `FizzBuzzExecutor`
   
@@ -230,6 +239,8 @@ end
 **FactoryMethodパターン**をクラスの**初期化**に実装して**Strategyパターン**オブジェクトを**インスタンス変数**に代入して**Commandパターン**を実行できるようにする。
   
 **Strategyパターン**の実装に**メソッドの移動**を行うためテストを追加する。
+  
+3または5で割り切れない場合のテストが失敗したので**Null Objectパターン**を導入して3または5で割り切れない場合は何も返さないクラスを追加する。
   
 ### ふりかえり
   
