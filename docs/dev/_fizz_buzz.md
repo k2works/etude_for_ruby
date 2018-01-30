@@ -31,6 +31,13 @@ Fizz Buzz
 + [x] ~~Strategyパターンの導入~~
   + [x] ファクトリメソッドの導入
   + [x] Null Objecパターンの導入
++ [ ] オブジェクトを演算できるようにする
+  + [ ] ValueObjectパターンの導入
+  + [ ] 積の概念を表すオブジェクトの導入
+  + [ ] $FizzBuzz = {Fizz}\times{Buzz}$
+  + [ ] 商の概念を表すオブジェクトの導入  
+  + [ ] $Buzz = \frac{Fizz}{FizzBuzz}$
+  + [ ] $Fizz = \frac{Buzz}{FizzBuzz}$
 
 
 ### クラス図
@@ -164,6 +171,8 @@ deactivate FizzBuzzExecutor
 ## [イテレーション３](https://github.com/k2works/etude_for_ruby/blob/5e92fa85f46147fa59ae24d92fa356f47a0f5156/docs/dev/fizz_buzz.md)
 ## イテレーション４
 
+作業を開始するにあたって**TODOリスト**の追加・更新をする。  
+
 ### ふりかえり
 
 #### KEEP
@@ -188,8 +197,8 @@ deactivate FizzBuzzExecutor
 + 設計
 + 実装
 
-||||#1|#2|#3|
-|:---|:---|:---|:---|:---|:---|
+||||#1|#2|#3|#4|
+|:---|:---|:---|:---|:---|:---|:---|
 |原則|||
 ||基本定理||
 |||スモール・イズ・ビューティフル|
@@ -239,7 +248,7 @@ deactivate FizzBuzzExecutor
 ||テスト駆動開発のパターン||
 |||テスト(名詞)|
 |||独立したテスト|
-|||TODOリスト|o|o|o
+|||TODOリスト|o|o|o|o
 |||テストファースト|o|
 |||アサートファースト|o|
 |||テストデータ|
@@ -276,11 +285,11 @@ deactivate FizzBuzzExecutor
 |||まとめてテスト|
 ||デザインパターン|
 |||Commandパターン|||o
-|||Value Objectパターン|||o
+|||Value Objectパターン||||o
 |||Null Objectパターン|||o
 |||Template Methodパターン|||o
 |||Pluggable Objectパターン|
-|||Factory Methodパターン|
+|||Factory Methodパターン|||o
 |||Imposterパターン|
 |||Collecting Parameterパターン|
 |||Singletonパターン|

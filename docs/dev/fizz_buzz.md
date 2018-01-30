@@ -28,27 +28,34 @@ Fizz Buzz
 + [x] ~~Strategyパターンの導入~~
   + [x] ファクトリメソッドの導入
   + [x] Null Objecパターンの導入
++ [ ] オブジェクトを演算できるようにする
+  + [ ] ValueObjectパターンの導入
+  + [ ] 積の概念を表すオブジェクトの導入
+  + [ ] <img src="https://latex.codecogs.com/gif.latex?FizzBuzz%20=%20{Fizz}&#x5C;times{Buzz}"/>
+  + [ ] 商の概念を表すオブジェクトの導入  
+  + [ ] <img src="https://latex.codecogs.com/gif.latex?Buzz%20=%20&#x5C;frac{Fizz}{FizzBuzz}"/>
+  + [ ] <img src="https://latex.codecogs.com/gif.latex?Fizz%20=%20&#x5C;frac{Buzz}{FizzBuzz}"/>
   
   
 ### クラス図
   
 
-![](assets/fizz_buzz/a3f7a2b5adc6a1c63cf76b9f21d259aa0.png?0.38921521069567544)  
+![](assets/fizz_buzz/a3f7a2b5adc6a1c63cf76b9f21d259aa0.png?0.016087474729881812)  
 ### シーケンス図
   
 #### execute
   
 
-![](assets/fizz_buzz/a3f7a2b5adc6a1c63cf76b9f21d259aa1.png?0.42002517394346883)  
+![](assets/fizz_buzz/a3f7a2b5adc6a1c63cf76b9f21d259aa1.png?0.2878285512866967)  
   
 
-![](assets/fizz_buzz/a3f7a2b5adc6a1c63cf76b9f21d259aa2.png?0.43651423514508925)  
+![](assets/fizz_buzz/a3f7a2b5adc6a1c63cf76b9f21d259aa2.png?0.5680437810072221)  
   
 
-![](assets/fizz_buzz/a3f7a2b5adc6a1c63cf76b9f21d259aa3.png?0.8083654154447832)  
+![](assets/fizz_buzz/a3f7a2b5adc6a1c63cf76b9f21d259aa3.png?0.9838066134151482)  
   
 
-![](assets/fizz_buzz/a3f7a2b5adc6a1c63cf76b9f21d259aa4.png?0.2604911292553118)  
+![](assets/fizz_buzz/a3f7a2b5adc6a1c63cf76b9f21d259aa4.png?0.3511153884573839)  
   
   
 ## 実装
@@ -226,6 +233,8 @@ end
 ## イテレーション４
   
   
+作業を開始するにあたって**TODOリスト**の追加・更新をする。  
+  
 ### ふりかえり
   
   
@@ -254,8 +263,8 @@ end
 + 設計
 + 実装
   
-||||#1|#2|#3|
-|:---|:---|:---|:---|:---|:---|
+||||#1|#2|#3|#4|
+|:---|:---|:---|:---|:---|:---|:---|
 |原則|||
 ||基本定理||
 |||スモール・イズ・ビューティフル|
@@ -305,7 +314,7 @@ end
 ||テスト駆動開発のパターン||
 |||テスト(名詞)|
 |||独立したテスト|
-|||TODOリスト|o|o|o
+|||TODOリスト|o|o|o|o
 |||テストファースト|o|
 |||アサートファースト|o|
 |||テストデータ|
@@ -342,11 +351,11 @@ end
 |||まとめてテスト|
 ||デザインパターン|
 |||Commandパターン|||o
-|||Value Objectパターン|||o
+|||Value Objectパターン||||o
 |||Null Objectパターン|||o
 |||Template Methodパターン|||o
 |||Pluggable Objectパターン|
-|||Factory Methodパターン|
+|||Factory Methodパターン|||o
 |||Imposterパターン|
 |||Collecting Parameterパターン|
 |||Singletonパターン|
