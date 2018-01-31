@@ -2,9 +2,11 @@
 
 # Fizz value object
 class FizzValue < FizzBuzzValueObject
+  VALUE = 'Fizz'
+
   def initialize(number)
     @number = number
-    @value = 'Fizz'
+    @value = VALUE
   end
 
   def execute

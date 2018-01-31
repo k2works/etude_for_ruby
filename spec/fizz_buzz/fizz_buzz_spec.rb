@@ -5,31 +5,40 @@ require 'spec_helper'
 RSpec.describe FizzBuzzValueObject do
   describe '#execute' do
     it 'return Fizz' do
-      value = FizzBuzzValueObject.new(3)
+      number = 3
+      value = create_value_object(number)
       result = value.execute
       expect('Fizz').to eq result
     end
 
     it 'return Buzz' do
-      value = FizzBuzzValueObject.new(5)
+      number = 5
+      value = create_value_object(number)
       result = value.execute
       expect('Buzz').to eq result
     end
 
     it 'return FizzBuzz' do
-      value = FizzBuzzValueObject.new(15)
+      number = 15
+      value = create_value_object(number)
       result = value.execute
       expect('FizzBuzz').to eq result
 
-      value = FizzBuzzValueObject.new(45)
+      number = 45
+      value = create_value_object(number)
       result = value.execute
       expect('FizzBuzz').to eq result
     end
 
     it 'return nil' do
-      value = FizzBuzzValueObject.new(1)
+      number = 1
+      value = create_value_object(number)
       result = value.execute
       expect(result).to be_nil
     end
+  end
+
+  def create_value_object(number)
+    FizzBuzzValueObject.create(number)
   end
 end

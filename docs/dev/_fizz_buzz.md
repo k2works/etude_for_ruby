@@ -33,6 +33,7 @@ Fizz Buzz
   + [x] Null Objecパターンの導入
 + [ ] オブジェクトを演算できるようにする
   + [ ] **ValueObjectパターンの導入**
+  + [ ] Commandパターンのインターフェイスへの分離
   + [ ] 積の概念を表すオブジェクトの導入
   + [ ] $FizzBuzz = {Fizz}\times{Buzz}$
   + [ ] 商の概念を表すオブジェクトの導入  
@@ -50,19 +51,17 @@ class FizzBuzzValueObject {
   ~number
   ~value
   +execute()
+  +{static}create(dividend)  
 }
 class FizzValue {
-  +execute()
 }
 class BuzzValue {
-  +execute()
 }
 class FizzBuzzValue {
-  +execute()
 }
 class NullValue {
-  +execute()
 }
+
 FizzBuzzExecutor -> FizzBuzzValueObject
 FizzBuzzValueObject <|-- FizzValue
 FizzBuzzValueObject <|-- BuzzValue
@@ -79,75 +78,18 @@ activate FizzBuzzExecutor
 loop count
   FizzBuzzExecutor -> FizzBuzzValueObject :execute
   activate FizzBuzzValueObject
-    FizzBuzzValueObject -> FizzValue :new  
+    FizzBuzzValueObject -> FizzValue :create  
     activate FizzValue
-      FizzValue --> FizzBuzzValueObject
-      FizzBuzzExecutor <-- FizzBuzzValueObject
+      FizzBuzzExecutor <-- FizzValue        
+  deactivate FizzBuzzValueObject    
+      FizzBuzzExecutor -> FizzValue :execute
+      FizzBuzzExecutor <-- FizzValue        
     deactivate FizzValue
-  deactivate FizzBuzzValueObject
 end
 <-- FizzBuzzExecutor :result
 deactivate FizzBuzzExecutor
 @enduml
 ```
-
-```puml
-@startuml
-activate FizzBuzzExecutor
--> FizzBuzzExecutor :execute
-loop count
-  FizzBuzzExecutor -> FizzBuzzValueObject :execute
-  activate FizzBuzzValueObject
-    FizzBuzzValueObject -> BuzzValue :new  
-    activate BuzzValue
-      BuzzValue --> FizzBuzzValueObject
-      FizzBuzzExecutor <-- FizzBuzzValueObject
-    deactivate BuzzValue
-  deactivate FizzBuzzValueObject
-end
-<-- FizzBuzzExecutor :result
-deactivate FizzBuzzExecutor
-@enduml
-```
-
-```puml
-@startuml
-activate FizzBuzzExecutor
--> FizzBuzzExecutor :execute
-loop count
-  FizzBuzzExecutor -> FizzBuzzValueObject :execute
-  activate FizzBuzzValueObject
-    FizzBuzzValueObject -> FizzBuzzValue :new  
-    activate FizzBuzzValue
-      FizzBuzzValue --> FizzBuzzValueObject
-      FizzBuzzExecutor <-- FizzBuzzValueObject
-    deactivate FizzBuzzValue
-  deactivate FizzBuzzValue
-end
-<-- FizzBuzzExecutor :result
-deactivate FizzBuzzExecutor
-@enduml
-```
-
-```puml
-@startuml
-activate FizzBuzzExecutor
--> FizzBuzzExecutor :execute
-loop count
-  FizzBuzzExecutor -> FizzBuzzValueObject :execute
-  activate FizzBuzzValueObject
-    FizzBuzzValueObject -> NullValue :new  
-    activate NullValue
-      NullValue --> FizzBuzzValueObject
-      FizzBuzzExecutor <-- FizzBuzzValueObject
-    deactivate NullValue
-  deactivate FizzBuzzValueObject
-end
-<-- FizzBuzzExecutor :result
-deactivate FizzBuzzExecutor
-@enduml
-```
-
 
 ## 実装
 ### `FizzBuzzTest`
@@ -176,6 +118,8 @@ deactivate FizzBuzzExecutor
 作業を開始するにあたって**TODOリスト**の追加・更新をする。
 
 ValueObjectパターンを導入するにあたって**単一責任の原則**に従ってクラスの名前へ変更する。数値と値を保持する**インスタンス変数**を親クラスに追加して**継承**し子クラスでも使えるようにする。子クラスでは**初期化**の際に**継承**した**インスタンス変数**に代入するようにする。
+
+**ValueObject**の親クラスの**初期化**を見直したところ**リスコフの置換原則**に従っているとはいえない実装だったので**FactoryMethod**を**クラスメソッド**に**メソッドの抽出**した。結果的には**Strategyパターン**による実装から単純な**継承**になった。**ValueObject**の値は各クラスで固定の文字列値なので**マジックナンバーからシンボル定数へ**変更した。改めて**Commandパターン**による実装を見直したところ**継承**による実装はよろしくないと思ったので**TODOリスト**に関連するタスクを追加した。
 
 
 ### ふりかえり
@@ -217,8 +161,8 @@ ValueObjectパターンを導入するにあたって**単一責任の原則**�
 |||すべてのプログラムをフィルタにする|
 ||アプリケーション設計原則||
 |||単一責任の原則(SRP)|o|o||o
-|||オープン・クローズドの原則(OCP)|||o
-|||リスコフの置換原則(LSP)|
+|||オープン・クローズドの原則(OCP)|||o|o
+|||リスコフの置換原則(LSP)||||o
 |||依存関係逆転の原則(DIP)|
 |||インタフェース分離の原則(ISP)|
 ||パッケージ設計の原則||
@@ -289,16 +233,16 @@ ValueObjectパターンを導入するにあたって**単一責任の原則**�
 |||例外のテスト|
 |||まとめてテスト|
 ||デザインパターン|
-|||Commandパターン|||o
+|||Commandパターン|||o|o
 |||Value Objectパターン||||o
 |||Null Objectパターン|||o
 |||Template Methodパターン|||o
 |||Pluggable Objectパターン|
-|||Factory Methodパターン|||o
+|||Factory Methodパターン|||o|o
 |||Imposterパターン|
 |||Collecting Parameterパターン|
 |||Singletonパターン|
-|||Strategyパターン|||o
+|||Strategyパターン|||o|o
 |実践|||
 ||XP||
 ||主要プラクティス   |     |     |     |     |     |     |     |
@@ -365,7 +309,7 @@ ValueObjectパターンを導入するにあたって**単一責任の原則**�
 |||紋切り型コードく繰り返し|
 ||リファクタリングカタログ|
 |||メソッドの構成方法|
-|||メソッドの抽出(Extract Method)|
+|||メソッドの抽出(Extract Method)||||o
 |||メソッドのインライン化(Inline Method)|
 |||一時変数のインライン化(Inline Temp)|
 |||一時変数から問い合わせメソッドへ(Replace Temp with Query)|
@@ -401,7 +345,7 @@ ValueObjectパターンを導入するにあたって**単一責任の原則**�
 |||ハッシュからオブジェクトへ(Replace Array with Object)|
 |||片方向リンクから双方向リンクへ(Change Unidirectional Association to Bidirectional)|
 |||双方向リンクから片方向リンクへ(Change Bidirectional Association to Unidirectional)|
-|||マジックナンバーからシンボル定数へ(Replace Magic Number with Symbolic Constant)|
+|||マジックナンバーからシンボル定数へ(Replace Magic Number with Symbolic Constant)||||o
 |||コレクションのカプセル化(Encapsulate Collection)|
 |||レコードからデータクラスへ(Replace Record with Data Class)|
 |||タイプコードからポリモーフィズムへ(Replace Type Code with Polymorphism)|
@@ -431,7 +375,7 @@ ValueObjectパターンを導入するにあたって**単一責任の原則**�
 |||引数オブジェクトの導入(Introduce Parameter Object)|
 |||設定メソッドの削除(Remove Setting Method)|
 |||メソッドの隠蔽(Hide Method)|
-|||コンストラクタからファクトリメソッドへ(Replace Constructor with Factory Method)|
+|||コンストラクタからファクトリメソッドへ(Replace Constructor with Factory Method)||||o
 |||エラーコードから例外へ(Replace Error Code wiht Exception)|
 |||例外からテストへ(Replace Exception with Test)|
 |||ゲートウェイの導入(Introduce Gateway)|
@@ -458,17 +402,17 @@ ValueObjectパターンを導入するにあたって**単一責任の原則**�
 ||変数と定数   |     |     |     |     |     |     |     |
 ||                |ローカル変数|o     |     |     |     |     |     |
 ||                |グローバル変数|     |     |     |     |     |     |
-||                |定数|     |     |     |     |     |     |
+||                |定数|     |     |     |o     |     |     |
 ||条件分岐と真偽値 | |o     |     |     |     |     |     |
 ||式          | |o     |     |
 ||クラス       ||     |     |     |     |    |     |
 ||            |クラスの定義式|o     |     |     |     |     |     |
 ||            |インスタンス変数|     |     |o     |o     |     |     |
 ||            |self|o     |     |     |     |     |     |
-||            |初期化|     |     |o     |     |o     |     |
-||            |クラスメソッド|o     |     |     |     |     |     |
+||            |初期化|     |     |o     |o     |     |     |
+||            |クラスメソッド|o     |     |     |o     |     |     |
 ||            |クラス変数|     |     |     |     |     |     |
-||            |継承|     |     |o     |     |     |     |
+||            |継承|     |     |o     |o     |     |     |
 ||モジュール    ||     |     |     |     |     |     |
 ||            |モジュールの定義式|     |     |     |     |     |     |
 ||主な組み込みクラス            ||     |     |     |     |     |     |
