@@ -32,7 +32,7 @@ Fizz Buzz
   + [x] ファクトリメソッドの導入
   + [x] Null Objecパターンの導入
 + [ ] オブジェクトを演算できるようにする
-  + [ ] ValueObjectパターンの導入
+  + [ ] **ValueObjectパターンの導入**
   + [ ] 積の概念を表すオブジェクトの導入
   + [ ] $FizzBuzz = {Fizz}\times{Buzz}$
   + [ ] 商の概念を表すオブジェクトの導入  
@@ -46,7 +46,9 @@ Fizz Buzz
 class FizzBuzzExecutor {
   +{static}execute(count)  
 }
-class FizzBuzz {
+class FizzBuzzValueObject {
+  ~number
+  ~value
   +execute()
 }
 class FizzValue {
@@ -61,11 +63,11 @@ class FizzBuzzValue {
 class NullValue {
   +execute()
 }
-FizzBuzzExecutor -> FizzBuzz
-FizzBuzz <|-- FizzValue
-FizzBuzz <|-- BuzzValue
-FizzBuzz <|-- FizzBuzzValue
-FizzBuzz <|-- NullValue
+FizzBuzzExecutor -> FizzBuzzValueObject
+FizzBuzzValueObject <|-- FizzValue
+FizzBuzzValueObject <|-- BuzzValue
+FizzBuzzValueObject <|-- FizzBuzzValue
+FizzBuzzValueObject <|-- NullValue
 @enduml
 ```
 ### シーケンス図
@@ -75,14 +77,14 @@ FizzBuzz <|-- NullValue
 activate FizzBuzzExecutor
 -> FizzBuzzExecutor :execute
 loop count
-  FizzBuzzExecutor -> FizzBuzz :execute
-  activate FizzBuzz
-    FizzBuzz -> FizzValue :new  
+  FizzBuzzExecutor -> FizzBuzzValueObject :execute
+  activate FizzBuzzValueObject
+    FizzBuzzValueObject -> FizzValue :new  
     activate FizzValue
-      FizzValue --> FizzBuzz
-      FizzBuzzExecutor <-- FizzBuzz
+      FizzValue --> FizzBuzzValueObject
+      FizzBuzzExecutor <-- FizzBuzzValueObject
     deactivate FizzValue
-  deactivate FizzBuzz
+  deactivate FizzBuzzValueObject
 end
 <-- FizzBuzzExecutor :result
 deactivate FizzBuzzExecutor
@@ -94,14 +96,14 @@ deactivate FizzBuzzExecutor
 activate FizzBuzzExecutor
 -> FizzBuzzExecutor :execute
 loop count
-  FizzBuzzExecutor -> FizzBuzz :execute
-  activate FizzBuzz
-    FizzBuzz -> BuzzValue :new  
+  FizzBuzzExecutor -> FizzBuzzValueObject :execute
+  activate FizzBuzzValueObject
+    FizzBuzzValueObject -> BuzzValue :new  
     activate BuzzValue
-      BuzzValue --> FizzBuzz
-      FizzBuzzExecutor <-- FizzBuzz
+      BuzzValue --> FizzBuzzValueObject
+      FizzBuzzExecutor <-- FizzBuzzValueObject
     deactivate BuzzValue
-  deactivate FizzBuzz
+  deactivate FizzBuzzValueObject
 end
 <-- FizzBuzzExecutor :result
 deactivate FizzBuzzExecutor
@@ -113,12 +115,12 @@ deactivate FizzBuzzExecutor
 activate FizzBuzzExecutor
 -> FizzBuzzExecutor :execute
 loop count
-  FizzBuzzExecutor -> FizzBuzz :execute
-  activate FizzBuzz
-    FizzBuzz -> FizzBuzzValue :new  
+  FizzBuzzExecutor -> FizzBuzzValueObject :execute
+  activate FizzBuzzValueObject
+    FizzBuzzValueObject -> FizzBuzzValue :new  
     activate FizzBuzzValue
-      FizzBuzzValue --> FizzBuzz
-      FizzBuzzExecutor <-- FizzBuzz
+      FizzBuzzValue --> FizzBuzzValueObject
+      FizzBuzzExecutor <-- FizzBuzzValueObject
     deactivate FizzBuzzValue
   deactivate FizzBuzzValue
 end
@@ -132,14 +134,14 @@ deactivate FizzBuzzExecutor
 activate FizzBuzzExecutor
 -> FizzBuzzExecutor :execute
 loop count
-  FizzBuzzExecutor -> FizzBuzz :execute
-  activate FizzBuzz
-    FizzBuzz -> NullValue :new  
+  FizzBuzzExecutor -> FizzBuzzValueObject :execute
+  activate FizzBuzzValueObject
+    FizzBuzzValueObject -> NullValue :new  
     activate NullValue
-      NullValue --> FizzBuzz
-      FizzBuzzExecutor <-- FizzBuzz
+      NullValue --> FizzBuzzValueObject
+      FizzBuzzExecutor <-- FizzBuzzValueObject
     deactivate NullValue
-  deactivate FizzBuzz
+  deactivate FizzBuzzValueObject
 end
 <-- FizzBuzzExecutor :result
 deactivate FizzBuzzExecutor
@@ -152,8 +154,8 @@ deactivate FizzBuzzExecutor
 @import "../../spec/fizz_buzz/fizz_buzz_spec.rb"
 ### `FizzBuzzExecutorTest`
 @import "../../spec/fizz_buzz/fizz_buzz_executor_spec.rb"
-### `FizzBuzz`
-@import "../../lib/fizz_buzz/fizz_buzz.rb"
+### `FizzBuzzValueObject`
+@import "../../lib/fizz_buzz/fizz_buzz_value_object.rb"
 ### `FizzValue`
 @import "../../lib/fizz_buzz/fizz_value.rb"
 ### `Buzz`
@@ -171,7 +173,10 @@ deactivate FizzBuzzExecutor
 ## [イテレーション３](https://github.com/k2works/etude_for_ruby/blob/5e92fa85f46147fa59ae24d92fa356f47a0f5156/docs/dev/fizz_buzz.md)
 ## イテレーション４
 
-作業を開始するにあたって**TODOリスト**の追加・更新をする。  
+作業を開始するにあたって**TODOリスト**の追加・更新をする。
+
+ValueObjectパターンを導入するにあたって**単一責任の原則**に従ってクラスの名前へ変更する。数値と値を保持する**インスタンス変数**を親クラスに追加して**継承**し子クラスでも使えるようにする。子クラスでは**初期化**の際に**継承**した**インスタンス変数**に代入するようにする。
+
 
 ### ふりかえり
 
@@ -211,7 +216,7 @@ deactivate FizzBuzzExecutor
 |||過度の対話的インタフェースを避ける|
 |||すべてのプログラムをフィルタにする|
 ||アプリケーション設計原則||
-|||単一責任の原則(SRP)|o|o|
+|||単一責任の原則(SRP)|o|o||o
 |||オープン・クローズドの原則(OCP)|||o
 |||リスコフの置換原則(LSP)|
 |||依存関係逆転の原則(DIP)|
@@ -458,9 +463,9 @@ deactivate FizzBuzzExecutor
 ||式          | |o     |     |
 ||クラス       ||     |     |     |     |    |     |
 ||            |クラスの定義式|o     |     |     |     |     |     |
-||            |インスタンス変数|     |     |o     |     |     |     |
+||            |インスタンス変数|     |     |o     |o     |     |     |
 ||            |self|o     |     |     |     |     |     |
-||            |初期化|     |     |o     |     |     |     |
+||            |初期化|     |     |o     |     |o     |     |
 ||            |クラスメソッド|o     |     |     |     |     |     |
 ||            |クラス変数|     |     |     |     |     |     |
 ||            |継承|     |     |o     |     |     |     |

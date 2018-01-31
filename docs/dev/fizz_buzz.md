@@ -29,7 +29,7 @@ Fizz Buzz
   + [x] ファクトリメソッドの導入
   + [x] Null Objecパターンの導入
 + [ ] オブジェクトを演算できるようにする
-  + [ ] ValueObjectパターンの導入
+  + [ ] **ValueObjectパターンの導入**
   + [ ] 積の概念を表すオブジェクトの導入
   + [ ] <img src="https://latex.codecogs.com/gif.latex?FizzBuzz%20=%20{Fizz}&#x5C;times{Buzz}"/>
   + [ ] 商の概念を表すオブジェクトの導入  
@@ -40,22 +40,22 @@ Fizz Buzz
 ### クラス図
   
 
-![](assets/fizz_buzz/a3f7a2b5adc6a1c63cf76b9f21d259aa0.png?0.016087474729881812)  
+![](assets/fizz_buzz/a3f7a2b5adc6a1c63cf76b9f21d259aa0.png?0.15727091665804416)  
 ### シーケンス図
   
 #### execute
   
 
-![](assets/fizz_buzz/a3f7a2b5adc6a1c63cf76b9f21d259aa1.png?0.2878285512866967)  
+![](assets/fizz_buzz/a3f7a2b5adc6a1c63cf76b9f21d259aa1.png?0.6094732297356462)  
   
 
-![](assets/fizz_buzz/a3f7a2b5adc6a1c63cf76b9f21d259aa2.png?0.5680437810072221)  
+![](assets/fizz_buzz/a3f7a2b5adc6a1c63cf76b9f21d259aa2.png?0.6542205934660534)  
   
 
-![](assets/fizz_buzz/a3f7a2b5adc6a1c63cf76b9f21d259aa3.png?0.9838066134151482)  
+![](assets/fizz_buzz/a3f7a2b5adc6a1c63cf76b9f21d259aa3.png?0.11517562331509135)  
   
 
-![](assets/fizz_buzz/a3f7a2b5adc6a1c63cf76b9f21d259aa4.png?0.3511153884573839)  
+![](assets/fizz_buzz/a3f7a2b5adc6a1c63cf76b9f21d259aa4.png?0.5856858317779325)  
   
   
 ## 実装
@@ -67,32 +67,32 @@ Fizz Buzz
   
 require 'spec_helper'
   
-RSpec.describe FizzBuzz do
+RSpec.describe FizzBuzzValueObject do
   describe '#execute' do
     it 'return Fizz' do
-      value = FizzBuzz.new(3)
+      value = FizzBuzzValueObject.new(3)
       result = value.execute
       expect('Fizz').to eq result
     end
   
     it 'return Buzz' do
-      value = FizzBuzz.new(5)
+      value = FizzBuzzValueObject.new(5)
       result = value.execute
       expect('Buzz').to eq result
     end
   
     it 'return FizzBuzz' do
-      value = FizzBuzz.new(15)
+      value = FizzBuzzValueObject.new(15)
       result = value.execute
       expect('FizzBuzz').to eq result
   
-      value = FizzBuzz.new(45)
+      value = FizzBuzzValueObject.new(45)
       result = value.execute
       expect('FizzBuzz').to eq result
     end
   
     it 'return nil' do
-      value = FizzBuzz.new(1)
+      value = FizzBuzzValueObject.new(1)
       result = value.execute
       expect(result).to be_nil
     end
@@ -119,27 +119,30 @@ RSpec.describe FizzBuzzExecutor do
 end
   
 ```  
-### `FizzBuzz`
+### `FizzBuzzValueObject`
   
 ```rb
 # frozen_string_literal: true
   
 # FizzBuzz operation
-class FizzBuzz
+class FizzBuzzValueObject
+  attr_reader :number, :value
+  
   def initialize(dividend)
-    @value = if (dividend % 3).zero? && (dividend % 5).zero?
-               FizzBuzzValue.new
-             elsif (dividend % 3).zero?
-               FizzValue.new
-             elsif (dividend % 5).zero?
-               BuzzValue.new
-             else
-               NullValue.new
-             end
+    @number = dividend
+    @value_object = if (dividend % 3).zero? && (dividend % 5).zero?
+                      FizzBuzzValue.new(dividend)
+                    elsif (dividend % 3).zero?
+                      FizzValue.new(dividend)
+                    elsif (dividend % 5).zero?
+                      BuzzValue.new(dividend)
+                    else
+                      NullValue.new(dividend)
+                    end
   end
   
   def execute
-    @value.execute
+    @value_object.execute
   end
 end
   
@@ -150,11 +153,14 @@ end
 # frozen_string_literal: true
   
 # Fizz value object
-class FizzValue < FizzBuzz
-  def initialize; end
+class FizzValue < FizzBuzzValueObject
+  def initialize(number)
+    @number = number
+    @value = 'Fizz'
+  end
   
   def execute
-    'Fizz'
+    @value
   end
 end
   
@@ -165,11 +171,14 @@ end
 # frozen_string_literal: true
   
 # Buzz value object
-class BuzzValue < FizzBuzz
-  def initialize; end
+class BuzzValue < FizzBuzzValueObject
+  def initialize(number)
+    @number = number
+    @value = 'Buzz'
+  end
   
   def execute
-    'Buzz'
+    @value
   end
 end
   
@@ -180,11 +189,14 @@ end
 # frozen_string_literal: true
   
 # FizzBuzz value object
-class FizzBuzzValue < FizzBuzz
-  def initialize; end
+class FizzBuzzValue < FizzBuzzValueObject
+  def initialize(number)
+    @number = number
+    @value = 'FizzBuzz'
+  end
   
   def execute
-    'FizzBuzz'
+    @value
   end
 end
   
@@ -195,8 +207,10 @@ end
 # frozen_string_literal: true
   
 # Null object
-class NullValue < FizzBuzz
-  def initialize; end
+class NullValue < FizzBuzzValueObject
+  def initialize(number)
+    @number = number
+  end
   
   def execute; end
 end
@@ -213,7 +227,7 @@ class FizzBuzzExecutor
     result = nil
     i = 1
     while i <= count
-      value = FizzBuzz.new(i)
+      value = FizzBuzzValueObject.new(i)
       result = value.execute
       i += 1
     end
@@ -233,7 +247,10 @@ end
 ## イテレーション４
   
   
-作業を開始するにあたって**TODOリスト**の追加・更新をする。  
+作業を開始するにあたって**TODOリスト**の追加・更新をする。
+  
+ValueObjectパターンを導入するにあたって**単一責任の原則**に従ってクラスの名前へ変更する。数値と値を保持する**インスタンス変数**を親クラスに追加して**継承**し子クラスでも使えるようにする。子クラスでは**初期化**の際に**継承**した**インスタンス変数**に代入するようにする。
+  
   
 ### ふりかえり
   
@@ -277,7 +294,7 @@ end
 |||過度の対話的インタフェースを避ける|
 |||すべてのプログラムをフィルタにする|
 ||アプリケーション設計原則||
-|||単一責任の原則(SRP)|o|o|
+|||単一責任の原則(SRP)|o|o||o
 |||オープン・クローズドの原則(OCP)|||o
 |||リスコフの置換原則(LSP)|
 |||依存関係逆転の原則(DIP)|
@@ -524,9 +541,9 @@ end
 ||式          | |o     |     |
 ||クラス       ||     |     |     |     |    |     |
 ||            |クラスの定義式|o     |     |     |     |     |     |
-||            |インスタンス変数|     |     |o     |     |     |     |
+||            |インスタンス変数|     |     |o     |o     |     |     |
 ||            |self|o     |     |     |     |     |     |
-||            |初期化|     |     |o     |     |     |     |
+||            |初期化|     |     |o     |     |o     |     |
 ||            |クラスメソッド|o     |     |     |     |     |     |
 ||            |クラス変数|     |     |     |     |     |     |
 ||            |継承|     |     |o     |     |     |     |
